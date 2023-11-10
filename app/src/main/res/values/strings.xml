@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Warehouse Manager</string>
+    <string name="start">START</string>
+    <string name="wel">Quản Lý Kho Hàng</string>
+    <string name="txtDetailWel">Chào mừng bạn đến với ứng dụng quản lý kho hàng</string>
+    <string name="version">Version 1.0 by me</string>
+    <string name="image_welcome">Image Welcome</string>
+    <string name="forgetPassword"><u>Quên mật khẩu?</u></string>
+    <string name="pass">Mật khẩu:</string>
+    <string name="login">ĐĂNG NHẬP</string>
+    <string name="account">Tài khoản:</string>
+    <string name="subtitle">Đăng nhập để tiếp tục</string>
+    <string name="welcome_back">Chào mừng trở lại!</string>
+    <string name="pass_require">Yêu cầu mật khẩu mới</string>
+    <string name="number">Số điện thoại:</string>
+    <string name="submit">XÁC NHẬN</string>
+    <string name="back_to_login"><u>Quay về màn hình đăng nhập</u></string>
+
+</resources>

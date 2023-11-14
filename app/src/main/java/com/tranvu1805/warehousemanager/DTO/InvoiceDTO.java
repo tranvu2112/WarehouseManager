@@ -1,22 +1,22 @@
 package com.tranvu1805.warehousemanager.DTO;
 
-public class Invoice {
+public class InvoiceDTO {
     int id;
     String number;
     int idUser, type, quantity;
     String detail;
 
-    public Invoice() {
+    public InvoiceDTO() {
     }
 
-    public Invoice(String number, int type, int quantity, String detail) {
+    public InvoiceDTO(String number, int type, int quantity, String detail) {
         this.number = number;
         this.type = type;
         this.quantity = quantity;
         this.detail = detail;
     }
 
-    public Invoice(String number, int idUser, int type, int quantity, String detail) {
+    public InvoiceDTO(String number, int idUser, int type, int quantity, String detail) {
         this.number = number;
         this.idUser = idUser;
         this.type = type;
@@ -24,7 +24,7 @@ public class Invoice {
         this.detail = detail;
     }
 
-    public Invoice(int id, String number, int idUser, int type, int quantity, String detail) {
+    public InvoiceDTO(int id, String number, int idUser, int type, int quantity, String detail) {
         this.id = id;
         this.number = number;
         this.idUser = idUser;

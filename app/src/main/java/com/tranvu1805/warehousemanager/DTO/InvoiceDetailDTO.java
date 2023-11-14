@@ -1,12 +1,12 @@
 package com.tranvu1805.warehousemanager.DTO;
 
-public class InvoiceDetail {
+public class InvoiceDetailDTO {
     int idProduct, idInvoice, quantity, price;
 
-    public InvoiceDetail() {
+    public InvoiceDetailDTO() {
     }
 
-    public InvoiceDetail(int idProduct, int idInvoice, int quantity, int price) {
+    public InvoiceDetailDTO(int idProduct, int idInvoice, int quantity, int price) {
         this.idProduct = idProduct;
         this.idInvoice = idInvoice;
         this.quantity = quantity;

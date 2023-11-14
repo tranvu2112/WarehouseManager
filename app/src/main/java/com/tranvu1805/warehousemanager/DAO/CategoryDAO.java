@@ -1,5 +1,6 @@
 package com.tranvu1805.warehousemanager.DAO;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -19,6 +20,7 @@ public class CategoryDAO {
         dbHelper = new MyDbHelper(context);
         db = dbHelper.getWritableDatabase();
     }
+    @SuppressLint("Recycle")
     public List<CategoryDTO> getList(){
         List<CategoryDTO> categoryDTOList = new ArrayList<>();
         Cursor c = db.rawQuery("select * from TheLoai",null);

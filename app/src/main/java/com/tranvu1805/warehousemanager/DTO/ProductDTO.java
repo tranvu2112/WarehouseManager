@@ -1,22 +1,22 @@
 package com.tranvu1805.warehousemanager.DTO;
 
-public class Product {
+public class ProductDTO {
     int id, idCat;
     String name;
     int price,quantity;
     String detail;
 
-    public Product() {
+    public ProductDTO() {
     }
 
-    public Product(String name, int price, int quantity, String detail) {
+    public ProductDTO(String name, int price, int quantity, String detail) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.detail = detail;
     }
 
-    public Product(int idCat, String name, int price, int quantity, String detail) {
+    public ProductDTO(int idCat, String name, int price, int quantity, String detail) {
         this.idCat = idCat;
         this.name = name;
         this.price = price;
@@ -24,7 +24,7 @@ public class Product {
         this.detail = detail;
     }
 
-    public Product(int id, int idCat, String name, int price, int quantity, String detail) {
+    public ProductDTO(int id, int idCat, String name, int price, int quantity, String detail) {
         this.id = id;
         this.idCat = idCat;
         this.name = name;

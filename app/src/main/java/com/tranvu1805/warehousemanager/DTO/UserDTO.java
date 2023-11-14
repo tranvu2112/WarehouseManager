@@ -2,25 +2,27 @@ package com.tranvu1805.warehousemanager.DTO;
 
 public class UserDTO {
     int id;
-    String name, pass;
+    String account, pass;
     int role;
-    String email;
+    String name, email;
 
     public UserDTO() {
     }
 
-    public UserDTO(String name, String pass, int role, String email) {
-        this.name = name;
+    public UserDTO(String account, String pass, int role,String name, String email) {
+        this.account = account;
         this.pass = pass;
         this.role = role;
+        this.name = name;
         this.email = email;
     }
 
-    public UserDTO(int id, String name, String pass, int role, String email) {
+    public UserDTO(int id, String account, String pass, int role,String name, String email) {
         this.id = id;
-        this.name = name;
+        this.account = account;
         this.pass = pass;
         this.role = role;
+        this.name = name;
         this.email = email;
     }
 
@@ -32,12 +34,12 @@ public class UserDTO {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getAccount() {
+        return account;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     public String getPass() {
@@ -54,6 +56,14 @@ public class UserDTO {
 
     public void setRole(int role) {
         this.role = role;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {

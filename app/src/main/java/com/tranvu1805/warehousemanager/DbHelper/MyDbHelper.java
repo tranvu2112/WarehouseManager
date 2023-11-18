@@ -26,6 +26,7 @@ public class MyDbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(SanPham);
         sqLiteDatabase.execSQL(HoaDon);
         sqLiteDatabase.execSQL(ChiTietHoaDon);
+        sqLiteDatabase.execSQL("insert into TaiKhoan values(null,'Admin','111111',1,'Admin','admin.com')");
     }
 
     @Override

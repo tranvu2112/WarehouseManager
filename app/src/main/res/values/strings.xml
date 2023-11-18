@@ -15,5 +15,11 @@
     <string name="number">Số điện thoại:</string>
     <string name="submit">XÁC NHẬN</string>
     <string name="back_to_login"><u>Quay về màn hình đăng nhập</u></string>
+    <string name="email">Email</string>
+    <string name="full_name">Họ tên</string>
+    <string name="confirm_pass">Xác nhận mật khẩu</string>
+    <string name="add_account">Thêm tài khoản mới</string>
+    <string name="confirm">XÁC NHẬN</string>
+    <string name="cancel">HỦY</string>
 
 </resources>

@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="10dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingVertical="20dp"
+    android:paddingHorizontal="10dp"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".AddAccount">
@@ -13,12 +14,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:text="@string/add_account"
+        android:text="Cập nhật tài khoản"
         android:textAllCaps="true"
         android:textColor="#2A822D"
         android:textSize="30sp"
         android:textStyle="bold" />
-
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,9 +27,8 @@
         android:textColorHint="@color/black"
         app:counterEnabled="true"
         app:errorEnabled="true">
-
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtUserAdd"
+            android:id="@+id/edtUserUpdate"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:hint="@string/account"
@@ -47,31 +46,10 @@
         app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtPassAdd"
+            android:id="@+id/edtPassUpdate"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:drawableEnd="@drawable/visible"
             android:hint="@string/pass"
-            android:inputType="textPassword"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:paddingHorizontal="10dp"
-        android:textColorHint="@color/black"
-        app:counterEnabled="true"
-        app:errorEnabled="true">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtConfirmPassAdd"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:drawableEnd="@drawable/visible"
-            android:hint="@string/confirm_pass"
             android:inputType="textPassword"
             android:textColor="@color/black"
             android:textStyle="bold" />
@@ -81,27 +59,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Chức vụ"
+        android:text="@string/role"
         android:textColor="#000"
         android:textSize="18sp"
         android:textStyle="bold" />
 
     <RadioGroup
-        android:id="@+id/rdoGroup"
+        android:id="@+id/rdoGroupUpdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/rdoAdminAdd"
+            android:id="@+id/rdoAdminUpdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Admin"
             android:textSize="18sp" />
 
         <RadioButton
-            android:id="@+id/rdoNvAdd"
+            android:id="@+id/rdoNvUpdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -118,7 +96,7 @@
         app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtNameAdd"
+            android:id="@+id/edtNameUpdate"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:hint="@string/full_name"
@@ -136,7 +114,7 @@
         app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtEmailAdd"
+            android:id="@+id/edtEmailUpdate"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:hint="@string/email"
@@ -152,7 +130,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnConfirmAdd"
+            android:id="@+id/btnConfirmUpdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/confirm"
@@ -162,7 +140,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/btnCancelAdd"
+            android:id="@+id/btnCancelUpdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cancel"

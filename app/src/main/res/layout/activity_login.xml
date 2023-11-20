@@ -25,13 +25,13 @@
         android:background="@drawable/outline_radius"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:paddingVertical="70dp"
+        android:paddingVertical="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.934">
+        app:layout_constraintVertical_bias="1.0">
 
         <TextView
             android:layout_width="wrap_content"
@@ -87,6 +87,14 @@
                 android:textColor="@color/black"
                 android:textStyle="bold" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <CheckBox
+            android:id="@+id/chkRemember"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="10dp"
+            android:text="@string/remember"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/btnLogin"

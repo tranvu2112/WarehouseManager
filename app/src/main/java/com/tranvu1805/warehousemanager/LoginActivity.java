@@ -1,31 +1,31 @@
 package com.tranvu1805.warehousemanager;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import android.text.method.SingleLineTransformationMethod;
 import android.view.MotionEvent;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.tranvu1805.warehousemanager.DAO.UserDAO;
 import com.tranvu1805.warehousemanager.DTO.UserDTO;
-
-import java.util.List;
+import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
 
 public class LoginActivity extends AppCompatActivity {
     TextInputEditText edtUser, edtPass;
     TextView txtForget;
     Button btnLogin;
+    CheckBox chkRemember;
     boolean isPassVisible = false;
 
     @Override
@@ -34,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         findViews();
         invisiblePassword();
+        checkRemember();
         btnLogin.setOnClickListener(view -> login());
         txtForget.setOnClickListener(view -> startActivity(new Intent(this, ForgetActivity.class)));
     }
@@ -43,24 +44,33 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
         } else {
             UserDAO userDAO = new UserDAO(this);
-            List<UserDTO> userDTOS = userDAO.getList();
             String user = edtUser.getText().toString().trim();
             String pass = edtPass.getText().toString().trim();
-            for (UserDTO u : userDTOS) {
-                if (u.getName().equals(user) && u.getPass().equals(pass)) {
+            UserDTO userDTO = userDAO.getLogin(user);
+            if (userDTO == null) {
+                CustomDialog.dialogSingle(this, "Thông báo", "Không tồn tại user","OK",((dialogInterface, i) -> {}));
+
+            } else {
+                if (userDTO.getPass().equals(pass)) {
+                    saveToSharedPreferences(userDTO);
+                    Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(this, HomeActivity.class));
                 } else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setTitle("Thông báo");
-                    builder.setMessage("Tài khoản, mật khẩu không chính xác");
-                    builder.setNegativeButton("OK", (dialogInterface, i) -> {
-
-                    });
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
+                    CustomDialog.dialogSingle(this, "Thông báo", "Mật khẩu sai","OK",((dialogInterface, i) -> {}));
                 }
             }
+
         }
+    }
+
+    private void saveToSharedPreferences(UserDTO userDTO) {
+        SharedPreferences sharedPreferences = getSharedPreferences("user",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("account", userDTO.getAccount());
+        editor.putInt("idUser", userDTO.getId());
+        editor.putString("password", userDTO.getPass());
+        editor.putBoolean("checked",chkRemember.isChecked());
+        editor.apply();
     }
 
     //ẩn hiện mật khẩu
@@ -92,5 +102,20 @@ public class LoginActivity extends AppCompatActivity {
         edtPass = findViewById(R.id.edtPassLogin);
         txtForget = findViewById(R.id.txtForgetLogin);
         btnLogin = findViewById(R.id.btnLogin);
+        chkRemember = findViewById(R.id.chkRemember);
+    }
+    //check lưu tài khoản
+    public void checkRemember(){
+        SharedPreferences sharedPreferences = getSharedPreferences("user",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        String user = sharedPreferences.getString("account","");
+        String pass = sharedPreferences.getString("password","");
+        boolean isSave = sharedPreferences.getBoolean("checked",false);
+        chkRemember.setChecked(isSave);
+        if(chkRemember.isChecked()){
+            edtUser.setText(user);
+            edtPass.setText(pass);
+        }
+        editor.apply();
     }
 }

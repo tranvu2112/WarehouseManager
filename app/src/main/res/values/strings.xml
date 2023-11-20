@@ -21,5 +21,8 @@
     <string name="add_account">Thêm tài khoản mới</string>
     <string name="confirm">XÁC NHẬN</string>
     <string name="cancel">HỦY</string>
+    <string name="remember">Lưu tài khoản</string>
+    <string name="list_account">Danh sách tài khoản</string>
+    <string name="role">Chức vụ</string>
 
 </resources>

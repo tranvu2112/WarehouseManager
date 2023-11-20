@@ -38,7 +38,7 @@ public class ForgetActivity extends AppCompatActivity {
             String user = edtUser.getText().toString().trim();
             String email = edtEmail.getText().toString().trim();
             for (UserDTO u : userDTOS) {
-                if (u.getName().equals(user) && u.getPass().equals(email)) {
+                if (u.getAccount().equals(user) && u.getEmail().equals(email)) {
                     u.setPass("111111");
                     userDAO.update(u);
                     AlertDialog.Builder builder = new AlertDialog.Builder(this);

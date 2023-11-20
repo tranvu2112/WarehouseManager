@@ -46,6 +46,7 @@ public class InvoiceDAO {
         ContentValues values = new ContentValues();
         values.put("SoHoaDon", u.getNumber());
         values.put("MaTaiKhoan", u.getIdUser());
+        values.put("MaTaiKhoan", u.getIdUser());
         values.put("LoaiHoaDon", u.getType());
         values.put("MoTa", u.getDetail());
         return (int) db.insert("HoaDon", null, values);

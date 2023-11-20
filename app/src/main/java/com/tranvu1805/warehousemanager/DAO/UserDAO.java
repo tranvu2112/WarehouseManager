@@ -41,10 +41,11 @@ public class UserDAO {
     }
     public int addRow(UserDTO u){
         ContentValues values = new ContentValues();
-        values.put("TaiKhoan",u.getName());
+        values.put("TaiKhoan",u.getAccount());
         values.put("MatKhau",u.getPass());
-        values.put("TenLoai",u.getName());
-        values.put("TenLoai",u.getName());
+        values.put("VaiTro",u.getRole());
+        values.put("HoTen",u.getName());
+        values.put("Email",u.getEmail());
         return (int) db.insert("TaiKhoan",null,values);
     }
     public int update(UserDTO u){
@@ -52,12 +53,28 @@ public class UserDAO {
         ContentValues values = new ContentValues();
         values.put("TaiKhoan",u.getName());
         values.put("MatKhau",u.getPass());
-        values.put("TenLoai",u.getName());
-        values.put("TenLoai",u.getName());
         return db.update("TaiKhoan",values,"MaTaiKhoan=?",id);
     }
     public int delete(UserDTO u){
         String[] id = new String[]{String.valueOf(u.getId())};
         return db.delete("TaiKhoan","MaTaiKhoan=?",id);
+    }
+    public UserDTO getLogin(String userName){
+        String[] taiKhoan = new String[]{userName};
+        Cursor c = db.rawQuery("select * from TaiKhoan where TaiKhoan=?",taiKhoan);
+
+        if(c!=null&&c.getCount()==1){
+            c.moveToFirst();
+            int id = c.getInt(0);
+            String account = c.getString(1);
+            String pass = c.getString(2);
+            int role = c.getInt(3);
+            String name = c.getString(4);
+            String email =c.getString(5);
+            UserDTO userDTO = new UserDTO(id,account,pass, role,name,email);
+            return userDTO;
+        }else {
+            return null;
+        }
     }
 }

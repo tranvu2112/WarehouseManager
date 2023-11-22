@@ -81,7 +81,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Chức vụ"
+        android:text="@string/role"
         android:textColor="#000"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -96,16 +96,16 @@
         <RadioButton
             android:id="@+id/rdoAdminAdd"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Admin"
+            android:layout_height="48sp"
+            android:text="@string/admin"
             android:textSize="18sp" />
 
         <RadioButton
             android:id="@+id/rdoNvAdd"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginStart="10dp"
-            android:text="Nhân viên"
+            android:text="@string/staff"
             android:textSize="18sp" />
     </RadioGroup>
 
@@ -159,7 +159,8 @@
             android:background="@drawable/confirm_button"
             android:textColor="#fff"
             android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            style="?android:attr/buttonBarButtonStyle" />
 
         <Button
             android:id="@+id/btnCancelAdd"
@@ -170,7 +171,8 @@
             android:layout_marginStart="20dp"
             android:textColor="#fff"
             android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            style="?android:attr/buttonBarButtonStyle" />
 
     </LinearLayout>
 </LinearLayout>

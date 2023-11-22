@@ -24,5 +24,8 @@
     <string name="remember">Lưu tài khoản</string>
     <string name="list_account">Danh sách tài khoản</string>
     <string name="role">Chức vụ</string>
+    <string name="edit_user">Sửa tài khoản</string>
+    <string name="admin">Admin</string>
+    <string name="staff">Nhân viên</string>
 
 </resources>

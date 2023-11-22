@@ -6,7 +6,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.tranvu1805.warehousemanager.DTO.CategoryDTO;
 import com.tranvu1805.warehousemanager.DTO.UserDTO;
 import com.tranvu1805.warehousemanager.DbHelper.MyDbHelper;
 
@@ -61,8 +60,7 @@ public class UserDAO {
     }
     public UserDTO getLogin(String userName){
         String[] taiKhoan = new String[]{userName};
-        Cursor c = db.rawQuery("select * from TaiKhoan where TaiKhoan=?",taiKhoan);
-
+        @SuppressLint("Recycle") Cursor c = db.rawQuery("select * from TaiKhoan where TaiKhoan=?",taiKhoan);
         if(c!=null&&c.getCount()==1){
             c.moveToFirst();
             int id = c.getInt(0);
@@ -71,8 +69,7 @@ public class UserDAO {
             int role = c.getInt(3);
             String name = c.getString(4);
             String email =c.getString(5);
-            UserDTO userDTO = new UserDTO(id,account,pass, role,name,email);
-            return userDTO;
+            return new UserDTO(id,account,pass, role,name,email);
         }else {
             return null;
         }

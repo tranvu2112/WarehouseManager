@@ -1,9 +1,14 @@
 package com.tranvu1805.warehousemanager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
+import android.text.method.SingleLineTransformationMethod;
+import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -19,6 +24,7 @@ public class AddAccount extends AppCompatActivity {
     RadioGroup rdoGroup;
     Button btnConfirm, btnCancel;
     UserDAO userDAO;
+    boolean isPassVisible = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +32,8 @@ public class AddAccount extends AppCompatActivity {
         setContentView(R.layout.activity_add_account);
         findViews();
         setSelectOnRadioGroup();
+        invisiblePassword(edtPass);
+        invisiblePassword(edtConfirmPass);
         btnCancel.setOnClickListener(view -> this.finish());
         btnConfirm.setOnClickListener(view -> addUser());
     }
@@ -71,5 +79,27 @@ public class AddAccount extends AppCompatActivity {
         rdoGroup = findViewById(R.id.rdoGroup);
         btnCancel = findViewById(R.id.btnCancelAdd);
         btnConfirm = findViewById(R.id.btnConfirmAdd);
+    }
+    @SuppressLint("ClickableViewAccessibility")
+    private void invisiblePassword(TextInputEditText edt) {
+        edt.setOnTouchListener((view, motionEvent) -> {
+            if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                int drawableWidth = edt.getCompoundDrawables()[2].getBounds().width();
+                if (motionEvent.getRawX() >= (edt.getRight() - drawableWidth)) {
+                    isPassVisible = !isPassVisible;
+                    if (isPassVisible) {
+                        edt.setTransformationMethod(SingleLineTransformationMethod.getInstance());
+                        edt.setCompoundDrawablesWithIntrinsicBounds(null, null,
+                                ContextCompat.getDrawable(this, R.drawable.invisible), null);
+                    } else {
+                        edt.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        edt.setCompoundDrawablesWithIntrinsicBounds(null, null,
+                                ContextCompat.getDrawable(this, R.drawable.visible), null);
+                    }
+                    return true;
+                }
+            }
+            return false;
+        });
     }
 }

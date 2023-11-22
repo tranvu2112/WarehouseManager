@@ -42,12 +42,14 @@ public class TaiKhoanAdapter extends RecyclerView.Adapter<TaiKhoanAdapter.ViewHo
         return new ViewHolder(view);
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+    @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         UserDTO u = userDTOS.get(position);
-        holder.txtName.setText(u.getName());
-        holder.txtAccount.setText(u.getAccount());
+        holder.txtName.setText("Họ tên: " + u.getName());
+        holder.txtAccount.setText("Tài khoản: " + u.getAccount());
+        String role = u.getRole() == 1 ? "Admin" : "Nhân viên";
+        holder.txtRole.setText("Chức vụ: " + role);
         holder.itemView.setOnLongClickListener(view -> {
             CustomDialog.dialogDouble(context, "Thông báo", "Xác nhận xóa tài khoản này", "Có",
                     (dialogInterface, i) -> {
@@ -96,23 +98,25 @@ public class TaiKhoanAdapter extends RecyclerView.Adapter<TaiKhoanAdapter.ViewHo
                 String pass = edtPass.getText().toString();
                 String name = edtName.getText().toString();
                 String email = edtEmail.getText().toString();
-                int role = rdoAdmin.isChecked()?1:0;
-                if(account.isEmpty()||pass.isEmpty()||name.isEmpty()||email.isEmpty()){
-                    CustomDialog.dialogSingle(context, "Thông báo", "Nhập đầy đủ thông tin", "OK", (dialogInterface, i)->{});
-                }else {
+                int role = rdoAdmin.isChecked() ? 1 : 0;
+                if (account.isEmpty() || pass.isEmpty() || name.isEmpty() || email.isEmpty()) {
+                    CustomDialog.dialogSingle(context, "Thông báo", "Nhập đầy đủ thông tin", "OK", (dialogInterface, i) -> {
+                    });
+                } else {
                     u.setAccount(account);
                     u.setPass(pass);
                     u.setName(name);
                     u.setEmail(email);
                     u.setRole(role);
                     int check = userDAO.update(u);
-                    if(check>0){
+                    if (check > 0) {
                         userDTOS.clear();
                         userDTOS.addAll(userDAO.getList());
                         notifyDataSetChanged();
                         Toast.makeText(context, "Thành công", Toast.LENGTH_SHORT).show();
-                    }else {
-                        CustomDialog.dialogSingle(context, "Thông báo", "Sửa thất bại", "OK", (dialogInterface, i)->{});
+                    } else {
+                        CustomDialog.dialogSingle(context, "Thông báo", "Sửa thất bại", "OK", (dialogInterface, i) -> {
+                        });
                     }
                 }
             });
@@ -132,7 +136,7 @@ public class TaiKhoanAdapter extends RecyclerView.Adapter<TaiKhoanAdapter.ViewHo
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtAccount, txtName;
+        TextView txtAccount, txtName, txtRole;
         ImageButton btnEdit;
 
         public ViewHolder(@NonNull View itemView) {
@@ -140,6 +144,7 @@ public class TaiKhoanAdapter extends RecyclerView.Adapter<TaiKhoanAdapter.ViewHo
             txtName = itemView.findViewById(R.id.txtFullNameRowHome);
             txtAccount = itemView.findViewById(R.id.txtAccountRowHome);
             btnEdit = itemView.findViewById(R.id.btnEditRow);
+            txtRole = itemView.findViewById(R.id.txtRoleRowHome);
         }
     }
 }

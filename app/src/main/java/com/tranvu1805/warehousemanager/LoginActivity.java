@@ -67,7 +67,9 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("user",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("account", userDTO.getAccount());
-        editor.putInt("idUser", userDTO.getId());
+        editor.putInt("idAccount", userDTO.getId());
+        editor.putString("name", userDTO.getName());
+        editor.putString("email", userDTO.getEmail());
         editor.putInt("role", userDTO.getRole());
         editor.putString("password", userDTO.getPass());
         editor.putBoolean("checked",chkRemember.isChecked());

@@ -31,5 +31,19 @@
     <string name="old_pass">Mật khẩu cũ</string>
     <string name="new_pass">Mật khẩu mới</string>
     <string name="confirm_new_pass">Xác nhận mật khẩu mới</string>
+    <string name="product_list">Danh sách sản phẩm</string>
+    <string name="serial_number">Số lưu kho</string>
+    <string name="category">Thể loại</string>
+    <string name="product_name">Tên sản phẩm</string>
+    <string name="quantity">Số lượng</string>
+    <string name="detail">Chi tiết</string>
+    <string name="price">Giá</string>
+    <string name="edit_product">Sửa sản phẩm</string>
+    <string name="del_product">Xóa sản phẩm</string>
+    <string name="image_product">Hình ảnh sản phẩm</string>
+    <string name="add_product">Thêm sản phẩm mới</string>
+    <string name="add_category">Thêm thể loại mới</string>
+    <string name="update_category">Cập nhật thể loại</string>
+    <string name="add_Invoice">Thêm hóa đơn mới</string>
 
 </resources>

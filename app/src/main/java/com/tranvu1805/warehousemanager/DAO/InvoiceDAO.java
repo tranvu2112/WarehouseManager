@@ -34,9 +34,9 @@ public class InvoiceDAO {
                 String number = c.getString(1);
                 int idUser = c.getInt(2);
                 int type = c.getInt(3);
-                int quantity = c.getInt(4);
+                String date = c.getString(4);
                 String detail = c.getString(5);
-                invoiceDTOS.add(new InvoiceDTO(id, number, idUser, type, quantity, detail));
+                invoiceDTOS.add(new InvoiceDTO(id, number, idUser, type, date, detail));
             } while (c.moveToNext());
         }
         return invoiceDTOS;
@@ -46,7 +46,7 @@ public class InvoiceDAO {
         ContentValues values = new ContentValues();
         values.put("SoHoaDon", u.getNumber());
         values.put("MaTaiKhoan", u.getIdUser());
-        values.put("MaTaiKhoan", u.getIdUser());
+        values.put("NgayThang",u.getDate());
         values.put("LoaiHoaDon", u.getType());
         values.put("MoTa", u.getDetail());
         return (int) db.insert("HoaDon", null, values);
@@ -58,6 +58,7 @@ public class InvoiceDAO {
         values.put("SoHoaDon", u.getNumber());
         values.put("MaTaiKhoan", u.getIdUser());
         values.put("LoaiHoaDon", u.getType());
+        values.put("NgayThang",u.getDate());
         values.put("MoTa", u.getDetail());
         return db.update("HoaDon", values, "MaHoaDon=?", id);
     }

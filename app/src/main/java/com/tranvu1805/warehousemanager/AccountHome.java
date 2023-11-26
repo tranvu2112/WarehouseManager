@@ -9,12 +9,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.tranvu1805.warehousemanager.DAO.UserDAO;
 import com.tranvu1805.warehousemanager.DTO.UserDTO;
-import com.tranvu1805.warehousemanager.adapter.TaiKhoanAdapter;
+import com.tranvu1805.warehousemanager.adapter.UserAdapter;
 
 import java.util.ArrayList;
 
@@ -22,7 +20,7 @@ public class AccountHome extends AppCompatActivity {
     RecyclerView rvUser;
     UserDAO userDAO;
     ArrayList<UserDTO> userDTOS;
-    TaiKhoanAdapter adapter;
+    UserAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +33,7 @@ public class AccountHome extends AppCompatActivity {
         rvUser = findViewById(R.id.rvAccount);
         userDAO = new UserDAO(this);
         userDTOS = (ArrayList<UserDTO>) userDAO.getList();
-        adapter = new TaiKhoanAdapter(this,userDTOS);
+        adapter = new UserAdapter(this,userDTOS);
     }
 
     @Override

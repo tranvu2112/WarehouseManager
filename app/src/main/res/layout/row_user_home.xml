@@ -10,7 +10,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/txtAccountRowHome"
+        android:id="@+id/txtPriceProductRow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/account"
@@ -20,11 +20,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtFullNameRowHome"
+        app:layout_constraintTop_toBottomOf="@+id/txtNameProductRow"
         app:layout_constraintVertical_bias="0.012" />
 
     <TextView
-        android:id="@+id/txtFullNameRowHome"
+        android:id="@+id/txtNameProductRow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/full_name"
@@ -49,11 +49,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAccountRowHome"
+        app:layout_constraintTop_toBottomOf="@+id/txtPriceProductRow"
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
-        android:id="@+id/btnEditRow"
+        android:id="@+id/btnEditProductRow"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="#BAAB7E"

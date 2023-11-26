@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_marginTop="10dp"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:paddingHorizontal="20dp"
-    android:paddingVertical="40dp">
+    tools:context=".AddProduct">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:text="@string/change_pass"
+        android:text="Thêm sản phẩm mới"
         android:textAllCaps="true"
         android:textColor="#2A822D"
         android:textSize="30sp"
@@ -24,17 +24,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:paddingHorizontal="10dp"
-        android:textColorHint="@color/black"
-        app:counterEnabled="true"
-        app:errorEnabled="true">
+        android:textColorHint="@color/black">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtOldPassChange"
+            android:id="@+id/edtNameProAdd"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:drawableEnd="@drawable/visible"
-            android:hint="@string/old_pass"
-            android:inputType="textPassword"
+            android:hint="@string/product_name"
             android:textColor="@color/black"
             android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -45,16 +41,14 @@
         android:layout_marginTop="10dp"
         android:paddingHorizontal="10dp"
         android:textColorHint="@color/black"
-        app:counterEnabled="true"
         app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtNewPassChange"
+            android:id="@+id/edtPriceProAdd"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:drawableEnd="@drawable/visible"
-            android:hint="@string/new_pass"
-            android:inputType="textPassword"
+            android:hint="@string/price"
+            android:inputType="text"
             android:textColor="@color/black"
             android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -65,20 +59,57 @@
         android:layout_marginTop="10dp"
         android:paddingHorizontal="10dp"
         android:textColorHint="@color/black"
-        app:counterEnabled="true"
         app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtConfirmNewPassChange"
+            android:id="@+id/edtQuantityProAdd"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:drawableEnd="@drawable/visible"
-            android:hint="@string/confirm_new_pass"
-            android:inputType="textPassword"
+            android:hint="@string/quantity"
+            android:inputType="text"
             android:textColor="@color/black"
             android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/category"
+        android:textColor="#000"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+    <Spinner
+        android:id="@+id/spCatProAdd"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="10dp"
+        android:spinnerMode="dropdown"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"/>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingHorizontal="10dp"
+        android:textColorHint="@color/black"
+        app:errorEnabled="true">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtDetailProAdd"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/detail"
+            android:inputType="text"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <ImageButton
+        android:id="@+id/btnImgProAdd"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/img_add_icon"
+        android:scaleType="fitXY"
+        android:layout_marginBottom="10dp"
+        android:contentDescription="Thêm hình ảnh" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -87,27 +118,28 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnConfirmChange"
-            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/btnConfirmProAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/confirm_button"
             android:text="@string/confirm"
+            android:background="@drawable/confirm_button"
             android:textColor="#fff"
             android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            style="?android:attr/buttonBarButtonStyle" />
 
         <Button
-            android:id="@+id/btnCancelChange"
-            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/btnCancelProAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:background="@drawable/cancel_button"
             android:text="@string/cancel"
+            android:background="@drawable/cancel_button"
+            android:layout_marginStart="20dp"
             android:textColor="#fff"
             android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            style="?android:attr/buttonBarButtonStyle" />
 
     </LinearLayout>
+
 </LinearLayout>

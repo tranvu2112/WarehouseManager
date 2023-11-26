@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:orientation="horizontal"
+    android:weightSum="6"
+    android:background="@drawable/row_user_background"
+    android:layout_marginVertical="5dp"
+    android:layout_marginHorizontal="5dp">
+
+    <ImageView
+        android:id="@+id/imgProductRow"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:layout_weight="2"
+        android:contentDescription="@string/image_product"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_launcher_background"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="10dp"
+        android:layout_weight="3">
+        <TextView
+            android:id="@+id/txtNameProductRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/product_name"
+            android:textColor="#3F51B5"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/txtPriceProductRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/price"
+            android:textColor="#D60909"
+            android:textSize="24sp" />
+        <TextView
+            android:id="@+id/txtCategoryProductRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/category"
+            android:textColor="#000"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/txtQuantityProductRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/quantity"
+            android:textColor="#000"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/txtDetailProductRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detail"
+            android:textColor="#000"
+            android:textSize="24sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_weight="1">
+    <ImageButton
+        android:id="@+id/btnEditProductRow"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#BAAB7E"
+        android:contentDescription="@string/edit_product"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/edit_product" />
+    </LinearLayout>
+</LinearLayout>

@@ -8,7 +8,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="wrap_content"
         android:scaleType="fitStart"
         android:src="@drawable/login_img"
         app:layout_constraintBottom_toBottomOf="parent"

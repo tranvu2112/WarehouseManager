@@ -12,8 +12,10 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputEditText;
 import com.tranvu1805.warehousemanager.DAO.UserDAO;
 import com.tranvu1805.warehousemanager.DTO.UserDTO;
+import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ForgetActivity extends AppCompatActivity {
     TextInputEditText edtUser, edtEmail;
@@ -30,35 +32,34 @@ public class ForgetActivity extends AppCompatActivity {
     }
 
     private void forgetPassword() {
-        if (edtUser.getText().toString().isEmpty() || edtEmail.getText().toString().isEmpty()) {
+        if (Objects.requireNonNull(edtUser.getText()).toString().isEmpty() ||
+                Objects.requireNonNull(edtEmail.getText()).toString().isEmpty()) {
             Toast.makeText(this, "Nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
         } else {
             UserDAO userDAO = new UserDAO(this);
             List<UserDTO> userDTOS = userDAO.getList();
             String user = edtUser.getText().toString().trim();
             String email = edtEmail.getText().toString().trim();
-            for (UserDTO u : userDTOS) {
-                if (u.getAccount().equals(user) && u.getEmail().equals(email)) {
-                    u.setPass("111111");
-                    userDAO.update(u);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setTitle("Thông báo");
-                    builder.setMessage("Mật khẩu đã đặt về mặc định là 111111");
-                    builder.setNegativeButton("OK", (dialogInterface, i) -> {
-
-                    });
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
+            UserDTO u = userDAO.getLogin(user);
+            if (u.getAccount().equals(user)) {
+                if (u.getEmail().equals(email)) {
+                    u.setPass("1111");
+                    int check = userDAO.update(u);
+                    if (check > 0) {
+                        CustomDialog.dialogSingle(this, "Thông báo", "Mật khẩu đã đổi về mặc định là 1111", "OK", ((dialogInterface, i) -> {
+                        }));
+                    } else {
+                        CustomDialog.dialogSingle(this, "Thông báo", "Đổi mật khẩu thất bại", "OK", ((dialogInterface, i) -> {
+                        }));
+                    }
                 } else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setTitle("Thông báo");
-                    builder.setMessage("Tài khoản, email không chính xác");
-                    builder.setNegativeButton("OK", (dialogInterface, i) -> {
+                    CustomDialog.dialogSingle(this, "Thông báo", "Email không chính xác", "OK", ((dialogInterface, i) -> {
+                    }));
 
-                    });
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
                 }
+            } else {
+                CustomDialog.dialogSingle(this, "Thông báo", "Không tồn tại user", "OK", ((dialogInterface, i) -> {
+                }));
             }
         }
     }

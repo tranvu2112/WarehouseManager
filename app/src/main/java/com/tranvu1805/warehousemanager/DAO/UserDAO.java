@@ -58,9 +58,10 @@ public class UserDAO {
         String[] id = new String[]{String.valueOf(u.getId())};
         return db.delete("TaiKhoan","MaTaiKhoan=?",id);
     }
+    @SuppressLint("Recycle")
     public UserDTO getLogin(String userName){
         String[] taiKhoan = new String[]{userName};
-        @SuppressLint("Recycle") Cursor c = db.rawQuery("select * from TaiKhoan where TaiKhoan=?",taiKhoan);
+         Cursor c = db.rawQuery("select * from TaiKhoan where TaiKhoan=?",taiKhoan);
         if(c!=null&&c.getCount()==1){
             c.moveToFirst();
             int id = c.getInt(0);

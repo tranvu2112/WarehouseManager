@@ -24,13 +24,13 @@ import com.tranvu1805.warehousemanager.R;
 
 import java.util.ArrayList;
 
-public class TaiKhoanAdapter extends RecyclerView.Adapter<TaiKhoanAdapter.ViewHolder> {
+public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     Context context;
     ArrayList<UserDTO> userDTOS;
     AlertDialog dialog;
     UserDAO userDAO;
 
-    public TaiKhoanAdapter(Context context, ArrayList<UserDTO> userDTOS) {
+    public UserAdapter(Context context, ArrayList<UserDTO> userDTOS) {
         this.context = context;
         this.userDTOS = userDTOS;
     }
@@ -141,9 +141,9 @@ public class TaiKhoanAdapter extends RecyclerView.Adapter<TaiKhoanAdapter.ViewHo
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtName = itemView.findViewById(R.id.txtFullNameRowHome);
-            txtAccount = itemView.findViewById(R.id.txtAccountRowHome);
-            btnEdit = itemView.findViewById(R.id.btnEditRow);
+            txtName = itemView.findViewById(R.id.txtNameProductRow);
+            txtAccount = itemView.findViewById(R.id.txtPriceProductRow);
+            btnEdit = itemView.findViewById(R.id.btnEditProductRow);
             txtRole = itemView.findViewById(R.id.txtRoleRowHome);
         }
     }

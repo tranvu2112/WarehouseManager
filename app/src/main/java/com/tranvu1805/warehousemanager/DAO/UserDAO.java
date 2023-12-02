@@ -60,8 +60,7 @@ public class UserDAO {
     }
     @SuppressLint("Recycle")
     public UserDTO getLogin(String userName){
-        String[] taiKhoan = new String[]{userName};
-         Cursor c = db.rawQuery("select * from TaiKhoan where TaiKhoan=?",taiKhoan);
+         Cursor c = db.rawQuery("select * from TaiKhoan where TaiKhoan=?",new String[]{userName});
         if(c!=null&&c.getCount()==1){
             c.moveToFirst();
             int id = c.getInt(0);

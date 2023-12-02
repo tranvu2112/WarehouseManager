@@ -5,7 +5,10 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +27,8 @@ import com.tranvu1805.warehousemanager.DTO.ProductDTO;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
 import com.tranvu1805.warehousemanager.adapter.SpinCatAdapter;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class AddProduct extends AppCompatActivity {
@@ -98,7 +103,9 @@ public class AddProduct extends AppCompatActivity {
                 Intent intent = o.getData();
                 if (intent != null) {
                     uriImg = intent.getData();
-                    btnSelectImg.setImageURI(uriImg);
+
+                    //btnSelectImg.setImageURI(uriImg);
+                    loadImageFromUri(uriImg);
                 }else {
                     CustomDialog.dialogSingle(this,"Thông báo","Bạn chưa chọn hình","OK",(dialogInterface, i) -> {});
                 }
@@ -106,5 +113,20 @@ public class AddProduct extends AppCompatActivity {
                 CustomDialog.dialogSingle(this,"Thông báo","Bạn chưa chọn hình","OK",(dialogInterface, i) -> {});
             }
         });
+    }
+    private void loadImageFromUri(Uri uri) {
+        try {
+            ContentResolver contentResolver = getContentResolver();
+            InputStream inputStream = contentResolver.openInputStream(uri);
+            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+            btnSelectImg.setImageBitmap(bitmap);
+            if (inputStream != null) {
+                inputStream.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            CustomDialog.dialogSingle(this, "Thông báo", "Đã xảy ra lỗi khi đọc hình ảnh", "OK", (dialogInterface, i) -> {
+            });
+        }
     }
 }

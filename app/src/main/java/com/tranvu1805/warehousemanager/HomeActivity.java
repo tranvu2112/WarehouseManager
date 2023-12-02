@@ -35,7 +35,7 @@ public class HomeActivity extends AppCompatActivity {
         btnChangePass.setOnClickListener(view1 -> {
             changePass();
         });
-        btnInvoice.setOnClickListener(view -> startActivity(new Intent(this, AddInvoice.class)));
+        btnInvoice.setOnClickListener(view -> startActivity(new Intent(this, InvoiceActivity.class)));
 
     }
 

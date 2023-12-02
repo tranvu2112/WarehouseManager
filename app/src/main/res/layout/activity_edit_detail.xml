@@ -7,13 +7,13 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".AddInvoice">
+    tools:context=".EditDetailActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:text="Lập hóa đơn"
+        android:text="Chi Tiết hóa đơn"
         android:textAllCaps="true"
         android:textColor="#2A822D"
         android:textSize="30sp"
@@ -26,7 +26,7 @@
         android:textColorHint="@color/black">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtInvoiceNumberAdd"
+            android:id="@+id/edtInvoiceDetailNumberEdit"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:hint="Số hóa đơn"
@@ -42,7 +42,7 @@
         android:textColorHint="@color/black">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtInvoiceDateAdd"
+            android:id="@+id/edtInvoiceDetailDateEdit"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:hint="Ngày"
@@ -66,14 +66,14 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
             <RadioButton
-                android:id="@+id/rdoImport"
+                android:id="@+id/rdoInvoiceDetailImportEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:textSize="20sp"
                 android:text="Nhập" />
 
             <RadioButton
-                android:id="@+id/rdoExport"
+                android:id="@+id/rdoInvoiceDetailExportEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_marginStart="20dp"
@@ -81,7 +81,7 @@
                 android:text="Xuất" />
         </RadioGroup>
         <Button
-            android:id="@+id/btnSaveInvoice"
+            android:id="@+id/btnSaveInvoiceDetailEdit"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_gravity="end"
@@ -92,11 +92,11 @@
             android:background="@drawable/confirm_button"/>
     </LinearLayout>
     <Spinner
-        android:id="@+id/spProductInvoice"
+        android:id="@+id/spProductInvoiceDetailEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvProductInvoice"
+        android:id="@+id/rvProductInvoiceDetailEdit"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

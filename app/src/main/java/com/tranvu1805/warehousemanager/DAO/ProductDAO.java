@@ -40,6 +40,14 @@ public class ProductDAO {
         }
         return productDTOS;
     }
+    public String getName(int idPro){
+        Cursor c = db.rawQuery("select TenSanPham from SanPham where MaSanPham=?",new String[]{String.valueOf(idPro)});
+        if(c.getCount()>0){
+            c.moveToFirst();
+            return c.getString(0);
+        }
+       return null;
+    }
     public int addRow(ProductDTO u){
         ContentValues values = new ContentValues();
         values.put("MaLoai",u.getIdCat());

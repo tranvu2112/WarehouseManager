@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.tranvu1805.warehousemanager.DTO.InvoiceDTO;
 import com.tranvu1805.warehousemanager.DTO.InvoiceDetailDTO;
@@ -39,6 +40,22 @@ public class InvoiceDetailDAO {
         }
         return invoiceDetailDTOS;
     }
+    public ArrayList<InvoiceDetailDTO> getListInvoice(int idInvoice) {
+        ArrayList<InvoiceDetailDTO> invoiceDetailDTOS2 = new ArrayList<>();
+        Cursor cursor = db.rawQuery("select * from ChiTietHoaDon where MaHoaDon=?",new String[]{String.valueOf(idInvoice)});
+        Log.d("zzzz", "cursor: "+cursor.getCount());
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            do {
+                int idPro = cursor.getInt(0);
+                int idInv = cursor.getInt(1);
+                int quantity = cursor.getInt(2);
+                int price = cursor.getInt(3);
+                invoiceDetailDTOS2.add(new InvoiceDetailDTO(idPro, idInv, quantity, price));
+            } while (cursor.moveToNext());
+        }
+        return invoiceDetailDTOS2;
+    }
 
     public int addRow(InvoiceDetailDTO u) {
         ContentValues values = new ContentValues();
@@ -48,7 +65,7 @@ public class InvoiceDetailDAO {
         values.put("DonGia", u.getPrice());
         return (int) db.insert("ChiTietHoaDon", null, values);
     }
-    //cập nhật theo mã hóa đơn và sản phẩm hay chỉ mình hóa đơn
+
     public int update(InvoiceDetailDTO u) {
         String[] id = new String[]{String.valueOf(u.getIdProduct()),String.valueOf(u.getIdInvoice())};
         ContentValues values = new ContentValues();

@@ -51,6 +51,15 @@ public class InvoiceDAO {
         values.put("MoTa", u.getDetail());
         return (int) db.insert("HoaDon", null, values);
     }
+    public long addRowAndGetId(InvoiceDTO u) {
+        ContentValues values = new ContentValues();
+        values.put("SoHoaDon", u.getNumber());
+        values.put("MaTaiKhoan", u.getIdUser());
+        values.put("NgayThang",u.getDate());
+        values.put("LoaiHoaDon", u.getType());
+        values.put("MoTa", u.getDetail());
+        return db.insert("HoaDon", null, values);
+    }
 
     public int update(InvoiceDTO u) {
         String[] id = new String[]{String.valueOf(u.getId())};
@@ -63,9 +72,9 @@ public class InvoiceDAO {
         return db.update("HoaDon", values, "MaHoaDon=?", id);
     }
 
-    public int delete(ProductDTO u) {
+    public int delete(InvoiceDTO u) {
         String[] id = new String[]{String.valueOf(u.getId())};
-        return db.delete("HoaDon", "MaSanPham=?", id);
+        return db.delete("HoaDon", "MaHoaDon=?", id);
     }
 }
 

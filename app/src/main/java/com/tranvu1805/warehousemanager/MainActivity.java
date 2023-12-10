@@ -13,12 +13,13 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
 
 public class MainActivity extends AppCompatActivity {
     Button btnStart;
-    private static final int REQUEST_CODE_READ_EXTERNAL_STORAGE = 1;
+    private static final int REQUEST_CODE_READ_EXTERNAL_STORAGE = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(this, LoginActivity.class))
             );
         } else {
-            ActivityCompat.requestPermissions(((Activity) this), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_READ_EXTERNAL_STORAGE);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_READ_EXTERNAL_STORAGE);
         }
     }
 
@@ -46,9 +47,10 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 CustomDialog.dialogSingle(this, "Thông báo", "Bạn phải cập quyền đọc bộ nhớ?",
                         "Đồng Ý", ((dialogInterface, i) -> {
-                            ActivityCompat.requestPermissions(((Activity) this), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_READ_EXTERNAL_STORAGE);
+                            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_READ_EXTERNAL_STORAGE);
                         }));
             }
         }
     }
+
 }

@@ -1,9 +1,13 @@
 package com.tranvu1805.warehousemanager.adapter;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -26,6 +32,7 @@ import com.tranvu1805.warehousemanager.R;
 import java.util.ArrayList;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
+    private static final int REQUEST_CODE_PERMISSION = 123;
     Context context;
     ArrayList<ProductDTO> productDTOS;
     ProductDAO productDAO;
@@ -52,8 +59,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.txtName.setText("Tên: " + p.getName());
         holder.txtQuantity.setText("Số lượng: " + p.getQuantity());
         holder.txtPrice.setText("Giá: " + p.getPrice());
-        if (p.getUriImg() != null) {
-            Picasso.get().load(p.getUriImg()).into(holder.imgProduct);
+        if(p.getImgBlob()!=null){
+            Bitmap imgBitmap = BitmapFactory.decodeByteArray(p.getImgBlob(),0,p.getImgBlob().length);
+            holder.imgProduct.setImageBitmap(imgBitmap);
         }
         holder.txtCat.setText("Thể loại: " + p.getIdCat());
         holder.txtDetail.setText("Mô tả: " + p.getDetail());
@@ -78,7 +86,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             bundle.putInt("Id",p.getId());
             bundle.putInt("IdCat",p.getIdCat());
             bundle.putString("Name",p.getName());
-            bundle.putString("UriImg",p.getUriImg());
+            bundle.putByteArray("imgBlob",p.getImgBlob());
             bundle.putInt("Price",p.getPrice());
             bundle.putInt("Quantity",p.getQuantity());
             bundle.putString("Detail",p.getDetail());
@@ -87,6 +95,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         });
 
     }
+
+
 
 
     @Override

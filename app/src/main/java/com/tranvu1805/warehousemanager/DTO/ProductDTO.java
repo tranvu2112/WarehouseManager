@@ -2,27 +2,28 @@ package com.tranvu1805.warehousemanager.DTO;
 
 public class ProductDTO {
     int id, idCat;
-    String name,uriImg;
+    String name;
     int price, quantity;
     String detail;
+    byte[] imgBlob;
 
     public ProductDTO() {
     }
 
 
-    public ProductDTO(int idCat, String uriImg, String name, int price, int quantity, String detail) {
+    public ProductDTO(int idCat, String name, int price, int quantity, String detail,byte[] imgBlob) {
         this.idCat = idCat;
-        this.uriImg = uriImg;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.detail = detail;
+        this.imgBlob = imgBlob;
     }
 
-    public ProductDTO(int id, int idCat, String uriImg, String name, int price, int quantity, String detail) {
+    public ProductDTO(int id, int idCat, String name, int price, int quantity, String detail,byte[] imgBlob) {
         this.id = id;
         this.idCat = idCat;
-        this.uriImg = uriImg;
+        this.imgBlob = imgBlob;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
@@ -77,11 +78,11 @@ public class ProductDTO {
         this.detail = detail;
     }
 
-    public String getUriImg() {
-        return uriImg;
+    public byte[] getImgBlob() {
+        return imgBlob;
     }
 
-    public void setUriImg(String uriImg) {
-        this.uriImg = uriImg;
+    public void setImgBlob(byte[] imgBlob) {
+        this.imgBlob = imgBlob;
     }
 }

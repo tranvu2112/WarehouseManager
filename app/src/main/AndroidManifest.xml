@@ -2,11 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32"
-        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+
 
     <application
         android:allowBackup="true"
@@ -18,45 +16,46 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WarehouseManager"
         tools:targetApi="31">
+
         <activity
             android:name=".InvoiceDetailActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".EditDetailActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".AddInvoice"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".InvoiceActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".EditProductActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".CategoryActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".AddProduct"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ProductActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".AccountHome"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".AddAccount"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".HomeActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ForgetActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".LoginActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

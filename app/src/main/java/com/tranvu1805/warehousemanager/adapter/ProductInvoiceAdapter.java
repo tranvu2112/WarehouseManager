@@ -3,6 +3,8 @@ package com.tranvu1805.warehousemanager.adapter;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,8 +49,9 @@ public class ProductInvoiceAdapter extends RecyclerView.Adapter<ProductInvoiceAd
             ProductDTO p = productDTOS.get(position);
             holder.txtName.setText(p.getName());
             holder.txtPrice.setText("Giá: " + p.getPrice());
-            if (p.getUriImg() != null) {
-                Picasso.get().load(p.getUriImg()).into(holder.imgProduct);
+            if(p.getImgBlob()!=null){
+                Bitmap imgBitmap = BitmapFactory.decodeByteArray(p.getImgBlob(),0,p.getImgBlob().length);
+                holder.imgProduct.setImageBitmap(imgBitmap);
             }
 
             holder.btnMinus.setOnClickListener(view -> {

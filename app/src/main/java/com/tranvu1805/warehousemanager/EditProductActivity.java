@@ -4,6 +4,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -20,7 +21,11 @@ import com.tranvu1805.warehousemanager.DTO.ProductDTO;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
 import com.tranvu1805.warehousemanager.adapter.SpinCatAdapter;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class EditProductActivity extends AppCompatActivity {
     TextInputEditText edtName, edtPrice, edtQuan, edtDetail;
@@ -32,7 +37,6 @@ public class EditProductActivity extends AppCompatActivity {
     CategoryDAO categoryDAO;
     Uri uriImg;
     ActivityResultLauncher<Intent> getImg;
-    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,35 +56,52 @@ public class EditProductActivity extends AppCompatActivity {
 
     private void updateProduct() {
         ProductDAO productDAO = new ProductDAO(this);
-        ArrayList<ProductDTO> productDTOS= (ArrayList<ProductDTO>) productDAO.getList();
-        String name = edtName.getText().toString();
-        String priceString = edtPrice.getText().toString();
-        String quanString = edtQuan.getText().toString();
-        String detail = edtDetail.getText().toString();
+        String name = Objects.requireNonNull(edtName.getText()).toString();
+        String priceString = Objects.requireNonNull(edtPrice.getText()).toString();
+        String quanString = Objects.requireNonNull(edtQuan.getText()).toString();
+        String detail = Objects.requireNonNull(edtDetail.getText()).toString();
         int idCat = (int) spinCatAdapter.getItemId(spCat.getSelectedItemPosition());
-        if(name.isEmpty()||priceString.isEmpty()||quanString.isEmpty()||detail.isEmpty()||uriImg==null){
-            CustomDialog.dialogSingle(this, "Thông báo", "Nhập đầy đủ thông tin", "OK", (dialogInterface, i)->{});
-        }else{
+        if (name.isEmpty() || priceString.isEmpty() || quanString.isEmpty() || detail.isEmpty() || uriImg == null) {
+            CustomDialog.dialogSingle(this, "Thông báo", "Nhập đầy đủ thông tin", "OK", (dialogInterface, i) -> {
+            });
+        } else {
             try {
                 int price = Integer.parseInt(priceString);
                 int quan = Integer.parseInt(quanString);
-                if(price<=0||quan<=0){
-                    CustomDialog.dialogSingle(this, "Thông báo", "Nhập giá, số lượng>0", "OK", (dialogInterface, i)->{});
-                }else {
-                    ProductDTO productDTO = new ProductDTO(id,idCat,uriImg.toString(),name,price,quan,detail);
+                if (price <= 0 || quan <= 0) {
+                    CustomDialog.dialogSingle(this, "Thông báo", "Nhập giá, số lượng>0", "OK", (dialogInterface, i) -> {
+                    });
+                } else {
+                    InputStream inputStream = getContentResolver().openInputStream(uriImg);
+                    assert inputStream != null;
+                    byte[] imageData = getBytes(inputStream);
+                    ProductDTO productDTO = new ProductDTO(idCat, name, price, quan, detail,imageData);
                     int check = productDAO.update(productDTO);
-                    if(check>0){
-                        CustomDialog.dialogSingle(this, "Thông báo", "Cập nhật thành công", "OK", (dialogInterface, i)->{finish();});
-                    }else {
-                        CustomDialog.dialogSingle(this, "Thông báo", "Cập nhật thất bại", "OK", (dialogInterface, i)->{finish();});
+                    if (check > 0) {
+                        CustomDialog.dialogSingle(this, "Thông báo", "Cập nhật thành công", "OK", (dialogInterface, i) -> finish());
+                    } else {
+                        CustomDialog.dialogSingle(this, "Thông báo", "Cập nhật thất bại", "OK", (dialogInterface, i) -> finish());
                     }
                 }
-            }catch (Exception e){
-                CustomDialog.dialogSingle(this, "Thông báo", "Nhập giá, số lượng đúng định dạng", "OK", (dialogInterface, i)->{});
+            } catch (Exception e) {
+                CustomDialog.dialogSingle(this, "Thông báo", "Nhập giá, số lượng đúng định dạng", "OK", (dialogInterface, i) -> {
+                });
             }
         }
     }
 
+    private byte[] getBytes(InputStream inputStream) throws IOException {
+        ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
+        int bufferSize = 1024;
+        byte[] buffer = new byte[bufferSize];
+        int len;
+        while ((len = inputStream.read(buffer)) != -1) {
+            byteBuffer.write(buffer, 0, len);
+        }
+        return byteBuffer.toByteArray();
+    }
+
+    @SuppressLint("SetTextI18n")
     private void getDataAndSetToViews() {
         Intent intent = getIntent();
         if (intent != null) {
@@ -89,14 +110,13 @@ public class EditProductActivity extends AppCompatActivity {
                 String name = bundle.getString("Name");
                 String uriImg = bundle.getString("UriImg");
                 String detail = bundle.getString("Detail");
-                id = bundle.getInt("Id");
                 int idCat = bundle.getInt("IdCat");
                 int price = bundle.getInt("Price");
                 int quantity = bundle.getInt("Quantity");
                 int pos = 0;
                 edtName.setText(name);
-                edtQuan.setText(quantity + "");
-                edtPrice.setText(price + "");
+                edtQuan.setText(String.valueOf(quantity));
+                edtPrice.setText(String.valueOf(price));
                 edtDetail.setText(detail);
                 btnSelectImg.setImageURI(Uri.parse(uriImg));
                 for (int i = 0; i < categoryDTOS.size(); i++) {
@@ -125,18 +145,21 @@ public class EditProductActivity extends AppCompatActivity {
         spinCatAdapter = new SpinCatAdapter(this, categoryDTOS);
         spCat.setAdapter(spinCatAdapter);
     }
+
     private void getImgForProduct() {
         getImg = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), o -> {
-            if(o.getResultCode()== Activity.RESULT_OK){
+            if (o.getResultCode() == Activity.RESULT_OK) {
                 Intent intent = o.getData();
                 if (intent != null) {
                     uriImg = intent.getData();
                     btnSelectImg.setImageURI(uriImg);
-                }else {
-                    CustomDialog.dialogSingle(this,"Thông báo","Bạn chưa chọn hình","OK",(dialogInterface, i) -> {});
+                } else {
+                    CustomDialog.dialogSingle(this, "Thông báo", "Bạn chưa chọn hình", "OK", (dialogInterface, i) -> {
+                    });
                 }
-            }else {
-                CustomDialog.dialogSingle(this,"Thông báo","Bạn chưa chọn hình","OK",(dialogInterface, i) -> {});
+            } else {
+                CustomDialog.dialogSingle(this, "Thông báo", "Bạn chưa chọn hình", "OK", (dialogInterface, i) -> {
+                });
             }
         });
     }

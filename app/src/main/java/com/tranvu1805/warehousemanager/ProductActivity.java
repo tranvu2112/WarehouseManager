@@ -6,10 +6,14 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +26,7 @@ import com.tranvu1805.warehousemanager.adapter.ProductAdapter;
 import java.util.ArrayList;
 
 public class ProductActivity extends AppCompatActivity {
+
     ArrayList<ProductDTO> productDTOS;
     ProductAdapter adapter;
     ProductDAO productDAO;
@@ -64,4 +69,5 @@ public class ProductActivity extends AppCompatActivity {
         productDTOS.addAll(productDAO.getList());
         adapter.notifyDataSetChanged();
     }
+
 }

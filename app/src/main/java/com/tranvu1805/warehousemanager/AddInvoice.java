@@ -1,10 +1,14 @@
 package com.tranvu1805.warehousemanager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +36,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class AddInvoice extends AppCompatActivity {
+    private static final int REQUEST_CODE_PERMISSION = 123;
     TextInputEditText edtNumber, edtDate;
     RadioButton rdoImport, rdoExport;
     Button btnSave;
@@ -125,8 +130,16 @@ public class AddInvoice extends AppCompatActivity {
         rvProduct = findViewById(R.id.rvProductInvoice);
         productDAO = new ProductDAO(this);
         productDTOS = (ArrayList<ProductDTO>) productDAO.getList();
-        spinProAdapter = new SpinProAdapter(this, productDTOS);
-        spinPro.setAdapter(spinProAdapter);
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    REQUEST_CODE_PERMISSION);
+        } else {
+            spinProAdapter = new SpinProAdapter(this, productDTOS);
+            spinPro.setAdapter(spinProAdapter);
+        }
+
         listProductToBuy = new ArrayList<>();
         invoiceDAO = new InvoiceDAO(this);
         invoiceDTOS = (ArrayList<InvoiceDTO>) invoiceDAO.getList();

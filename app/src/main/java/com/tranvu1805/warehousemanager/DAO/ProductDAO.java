@@ -34,8 +34,8 @@ public class ProductDAO {
                 int price = c.getInt(3);
                 int quantity = c.getInt(4);
                 String detail =c.getString(5);
-                String uriImg = c.getString(6);
-                productDTOS.add(new ProductDTO(id,idCat,uriImg,name,price,quantity,detail));
+                byte[] imgBlob = c.getBlob(6);
+                productDTOS.add(new ProductDTO(id,idCat,name,price,quantity,detail,imgBlob));
             }while (c.moveToNext());
         }
         return productDTOS;
@@ -53,7 +53,7 @@ public class ProductDAO {
         values.put("MaLoai",u.getIdCat());
         values.put("TenSanPham",u.getName());
         values.put("Gia",u.getPrice());
-        values.put("uriHinh",u.getUriImg());
+        values.put("imgBlob",u.getImgBlob());
         values.put("SoLuong",u.getQuantity());
         values.put("MoTa",u.getDetail());
         return (int) db.insert("SanPham",null,values);
@@ -64,7 +64,7 @@ public class ProductDAO {
         values.put("MaLoai",u.getIdCat());
         values.put("TenSanPham",u.getName());
         values.put("Gia",u.getPrice());
-        values.put("uriHinh",u.getUriImg());
+        values.put("imgBlob",u.getImgBlob());
         values.put("SoLuong",u.getQuantity());
         values.put("MoTa",u.getDetail());
         return db.update("SanPham",values,"MaSanPham=?",id);

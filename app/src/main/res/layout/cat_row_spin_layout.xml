@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="48dp"
-    android:background="#E4C87D"
-    android:orientation="vertical"
-    android:layout_marginVertical="10dp"
-    android:paddingHorizontal="10dp">
-    <TextView
-        android:id="@+id/txtNameCatRow"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="#00FFFFFF"
+    android:layout_width="match_parent">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingVertical="5dp"
-        android:text="@string/category"
-        android:textColor="#000"
-        android:textSize="24sp" />
-
-</LinearLayout>
+        android:background="#E4C87D"
+        android:orientation="vertical"
+        android:layout_marginVertical="10dp"
+        android:paddingHorizontal="10dp">
+        <TextView
+            android:id="@+id/txtNameCatRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingVertical="5dp"
+            android:text="@string/category"
+            android:textColor="#000"
+            android:textSize="24sp" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

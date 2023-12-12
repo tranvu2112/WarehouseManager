@@ -4,8 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
-
 public class MyDbHelper extends SQLiteOpenHelper {
     static String name = "db_khohang";
     static int version = 2;

@@ -7,7 +7,8 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".EditDetailActivity">
+    android:background="#D2F2BC"
+    tools:context=".EditInvoiceDetailActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -46,7 +47,8 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:hint="Ngày"
-            android:inputType="text"
+            android:inputType="none"
+            android:focusable="false"
             android:textColor="@color/black"
             android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -94,10 +96,12 @@
     <Spinner
         android:id="@+id/spProductInvoiceDetailEdit"
         android:layout_width="match_parent"
+        android:spinnerMode="dialog"
         android:layout_height="wrap_content"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProductInvoiceDetailEdit"
         android:layout_marginTop="10dp"
+        android:background="#7CADCB"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>

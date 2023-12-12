@@ -23,6 +23,7 @@ import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
 import com.tranvu1805.warehousemanager.R;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     Context context;
@@ -66,9 +67,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                     });
             return true;
         });
-        holder.btnEdit.setOnClickListener(view -> {
-            displayDialog(u);
-        });
+        holder.btnEdit.setOnClickListener(view -> displayDialog(u));
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -89,15 +88,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             edtName.setText(u.getName());
             if (u.getRole() == 1) rdoAdmin.setChecked(true);
             else rdoNv.setChecked(true);
-            rdoGroup.setOnCheckedChangeListener((radioGroup, i) -> {
-                rdoNv.setChecked(!rdoAdmin.isChecked());
-            });
+            rdoGroup.setOnCheckedChangeListener((radioGroup, i) -> rdoNv.setChecked(!rdoAdmin.isChecked()));
 
             btnConfirm.setOnClickListener(view -> {
-                String account = edtAccount.getText().toString();
-                String pass = edtPass.getText().toString();
-                String name = edtName.getText().toString();
-                String email = edtEmail.getText().toString();
+                String account = Objects.requireNonNull(edtAccount.getText()).toString();
+                String pass = Objects.requireNonNull(edtPass.getText()).toString();
+                String name = Objects.requireNonNull(edtName.getText()).toString();
+                String email = Objects.requireNonNull(edtEmail.getText()).toString();
                 int role = rdoAdmin.isChecked() ? 1 : 0;
                 if (account.isEmpty() || pass.isEmpty() || name.isEmpty() || email.isEmpty()) {
                     CustomDialog.dialogSingle(context, "Thông báo", "Nhập đầy đủ thông tin", "OK", (dialogInterface, i) -> {
@@ -108,24 +105,21 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                     u.setName(name);
                     u.setEmail(email);
                     u.setRole(role);
+                    userDAO = new UserDAO(context);
                     int check = userDAO.update(u);
                     if (check > 0) {
-                        userDTOS.clear();
-                        userDTOS.addAll(userDAO.getList());
-                        notifyDataSetChanged();
-                        Toast.makeText(context, "Thành công", Toast.LENGTH_SHORT).show();
+                        CustomDialog.dialogSingle(context, "Thông báo", "Sửa thành công", "OK", (dialogInterface, i) -> {
+                            notifyDataSetChanged();
+                            dialog.cancel();
+                        });
                     } else {
                         CustomDialog.dialogSingle(context, "Thông báo", "Sửa thất bại", "OK", (dialogInterface, i) -> {
                         });
                     }
                 }
             });
-            btnCancel.setOnClickListener(view -> {
-                dialog.cancel();
-            });
+            btnCancel.setOnClickListener(view -> dialog.cancel());
             edtEmail.setText(u.getEmail());
-
-
         });
         dialog.show();
     }

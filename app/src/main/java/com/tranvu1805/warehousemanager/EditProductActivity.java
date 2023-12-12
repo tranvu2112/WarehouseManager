@@ -7,8 +7,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -37,6 +40,8 @@ public class EditProductActivity extends AppCompatActivity {
     CategoryDAO categoryDAO;
     Uri uriImg;
     ActivityResultLauncher<Intent> getImg;
+    private int id;
+    private byte[] imgBlob;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +66,7 @@ public class EditProductActivity extends AppCompatActivity {
         String quanString = Objects.requireNonNull(edtQuan.getText()).toString();
         String detail = Objects.requireNonNull(edtDetail.getText()).toString();
         int idCat = (int) spinCatAdapter.getItemId(spCat.getSelectedItemPosition());
-        if (name.isEmpty() || priceString.isEmpty() || quanString.isEmpty() || detail.isEmpty() || uriImg == null) {
+        if (name.isEmpty() || priceString.isEmpty() || quanString.isEmpty() || detail.isEmpty() || imgBlob == null) {
             CustomDialog.dialogSingle(this, "Thông báo", "Nhập đầy đủ thông tin", "OK", (dialogInterface, i) -> {
             });
         } else {
@@ -72,10 +77,13 @@ public class EditProductActivity extends AppCompatActivity {
                     CustomDialog.dialogSingle(this, "Thông báo", "Nhập giá, số lượng>0", "OK", (dialogInterface, i) -> {
                     });
                 } else {
-                    InputStream inputStream = getContentResolver().openInputStream(uriImg);
-                    assert inputStream != null;
-                    byte[] imageData = getBytes(inputStream);
-                    ProductDTO productDTO = new ProductDTO(idCat, name, price, quan, detail,imageData);
+                    if(uriImg!=null){
+                        InputStream inputStream = getContentResolver().openInputStream(uriImg);
+                        assert inputStream != null;
+                        imgBlob = getBytes(inputStream);
+                    }
+                    ProductDTO productDTO = new ProductDTO(idCat, name, price, quan, detail,imgBlob);
+                    productDTO.setId(id);
                     int check = productDAO.update(productDTO);
                     if (check > 0) {
                         CustomDialog.dialogSingle(this, "Thông báo", "Cập nhật thành công", "OK", (dialogInterface, i) -> finish());
@@ -108,9 +116,10 @@ public class EditProductActivity extends AppCompatActivity {
             Bundle bundle = intent.getExtras();
             if (bundle != null) {
                 String name = bundle.getString("Name");
-                String uriImg = bundle.getString("UriImg");
+                imgBlob = bundle.getByteArray("imgBlob");
                 String detail = bundle.getString("Detail");
                 int idCat = bundle.getInt("IdCat");
+                id = bundle.getInt("Id");
                 int price = bundle.getInt("Price");
                 int quantity = bundle.getInt("Quantity");
                 int pos = 0;
@@ -118,7 +127,10 @@ public class EditProductActivity extends AppCompatActivity {
                 edtQuan.setText(String.valueOf(quantity));
                 edtPrice.setText(String.valueOf(price));
                 edtDetail.setText(detail);
-                btnSelectImg.setImageURI(Uri.parse(uriImg));
+                if(imgBlob!=null){
+                    Bitmap imgBitmap = BitmapFactory.decodeByteArray(imgBlob,0,imgBlob.length);
+                    btnSelectImg.setImageBitmap(imgBitmap);
+                }
                 for (int i = 0; i < categoryDTOS.size(); i++) {
                     if (categoryDTOS.get(i).getId() == idCat) {
                         pos = i;
@@ -139,7 +151,6 @@ public class EditProductActivity extends AppCompatActivity {
         btnCancel = findViewById(R.id.btnCancelProEdit);
         btnConfirm = findViewById(R.id.btnConfirmProEdit);
         btnSelectImg = findViewById(R.id.btnImgProEdit);
-
         categoryDAO = new CategoryDAO(this);
         categoryDTOS = (ArrayList<CategoryDTO>) categoryDAO.getList();
         spinCatAdapter = new SpinCatAdapter(this, categoryDTOS);

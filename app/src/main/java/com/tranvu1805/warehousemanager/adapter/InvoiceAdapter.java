@@ -8,16 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tranvu1805.warehousemanager.DAO.InvoiceDAO;
-import com.tranvu1805.warehousemanager.DAO.ProductDAO;
 import com.tranvu1805.warehousemanager.DTO.InvoiceDTO;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
-import com.tranvu1805.warehousemanager.EditDetailActivity;
+import com.tranvu1805.warehousemanager.EditInvoiceDetailActivity;
 import com.tranvu1805.warehousemanager.InvoiceDetailActivity;
 import com.tranvu1805.warehousemanager.R;
 
@@ -45,11 +43,11 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         InvoiceDTO invoiceDTO = invoiceDTOS.get(position);
-        holder.txtNumber.setText("Số hóa đơn: " + invoiceDTO.getNumber());
+        holder.txtNumber.setText("Số: " + invoiceDTO.getNumber());
         holder.txtUser.setText("Id Người tạo: " + invoiceDTO.getIdUser());
         String type = invoiceDTO.getType() == 0 ? "Nhập" : "Xuất";
-        holder.txtType.setText("Loại hóa đơn: " + type);
-        holder.txtDate.setText("Ngày tháng: " + invoiceDTO.getDate());
+        holder.txtType.setText("Loại: " + type);
+        holder.txtDate.setText("Ngày: " + invoiceDTO.getDate());
         holder.txtDetail.setText("Mô tả: " + invoiceDTO.getDetail());
         holder.btnEdit.setOnClickListener(view -> updateInvoice(invoiceDTO));
         holder.itemView.setOnClickListener(view -> {
@@ -78,7 +76,7 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
     }
 
     private void updateInvoice(InvoiceDTO invoiceDTO) {
-        Intent intent = new Intent(context, EditDetailActivity.class);
+        Intent intent = new Intent(context, EditInvoiceDetailActivity.class);
         intent.putExtra("idInvoice", invoiceDTO.getId());
         intent.putExtra("number", invoiceDTO.getNumber());
         intent.putExtra("date", invoiceDTO.getDate());

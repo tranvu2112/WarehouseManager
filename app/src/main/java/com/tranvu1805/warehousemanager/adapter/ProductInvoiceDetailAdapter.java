@@ -6,19 +6,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
 import com.tranvu1805.warehousemanager.DAO.ProductDAO;
 import com.tranvu1805.warehousemanager.DTO.InvoiceDetailDTO;
-import com.tranvu1805.warehousemanager.DTO.ProductDTO;
-import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
 import com.tranvu1805.warehousemanager.R;
 
 import java.util.ArrayList;

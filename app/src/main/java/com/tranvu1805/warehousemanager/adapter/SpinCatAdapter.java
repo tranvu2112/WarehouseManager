@@ -1,13 +1,10 @@
 package com.tranvu1805.warehousemanager.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.tranvu1805.warehousemanager.DTO.CategoryDTO;
 import com.tranvu1805.warehousemanager.R;

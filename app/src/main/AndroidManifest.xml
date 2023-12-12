@@ -21,29 +21,19 @@
             android:name=".InvoiceDetailActivity"
             android:exported="true" />
         <activity
-            android:name=".EditDetailActivity"
+            android:name=".EditInvoiceDetailActivity"
             android:exported="true" />
         <activity
             android:name=".AddInvoice"
             android:exported="true" />
         <activity
-            android:name=".InvoiceActivity"
-            android:exported="true" />
-        <activity
             android:name=".EditProductActivity"
             android:exported="true" />
-        <activity
-            android:name=".CategoryActivity"
-            android:exported="true" />
+
         <activity
             android:name=".AddProduct"
             android:exported="true" />
-        <activity
-            android:name=".ProductActivity"
-            android:exported="true" />
-        <activity
-            android:name=".AccountHome"
-            android:exported="true" />
+
         <activity
             android:name=".AddAccount"
             android:exported="true" />

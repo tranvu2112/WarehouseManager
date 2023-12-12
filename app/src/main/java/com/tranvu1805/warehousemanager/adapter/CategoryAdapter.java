@@ -71,14 +71,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                     categoryDAO = new CategoryDAO(context);
                     int check = categoryDAO.update(c);
                     if (check > 0) {
-                        notifyDataSetChanged();
                         CustomDialog.dialogSingle(context, "Thông báo", "Sửa thành công", "OK", (dialogInterface, i) -> {
+                            notifyDataSetChanged();
+                            dialog.cancel();
                         });
-                        dialog.cancel();
                     } else {
                         CustomDialog.dialogSingle(context, "Thông báo", "Sửa thất bại", "OK", (dialogInterface, i) -> {
+                            dialog.cancel();
+
                         });
-                        dialog.cancel();
                     }
                 }
             });

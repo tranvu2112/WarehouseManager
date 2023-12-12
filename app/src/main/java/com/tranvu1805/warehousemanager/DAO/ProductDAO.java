@@ -40,6 +40,7 @@ public class ProductDAO {
         }
         return productDTOS;
     }
+    @SuppressLint("Recycle")
     public String getName(int idPro){
         Cursor c = db.rawQuery("select TenSanPham from SanPham where MaSanPham=?",new String[]{String.valueOf(idPro)});
         if(c.getCount()>0){

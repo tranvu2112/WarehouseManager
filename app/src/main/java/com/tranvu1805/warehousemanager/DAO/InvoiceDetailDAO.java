@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.tranvu1805.warehousemanager.DTO.InvoiceDTO;
 import com.tranvu1805.warehousemanager.DTO.InvoiceDetailDTO;
 import com.tranvu1805.warehousemanager.DTO.ProductDTO;
 import com.tranvu1805.warehousemanager.DbHelper.MyDbHelper;
@@ -42,7 +41,7 @@ public class InvoiceDetailDAO {
     }
     public ArrayList<InvoiceDetailDTO> getListInvoice(int idInvoice) {
         ArrayList<InvoiceDetailDTO> invoiceDetailDTOS2 = new ArrayList<>();
-        Cursor cursor = db.rawQuery("select * from ChiTietHoaDon where MaHoaDon=?",new String[]{String.valueOf(idInvoice)});
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("select * from ChiTietHoaDon where MaHoaDon=?",new String[]{String.valueOf(idInvoice)});
         Log.d("zzzz", "cursor: "+cursor.getCount());
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();

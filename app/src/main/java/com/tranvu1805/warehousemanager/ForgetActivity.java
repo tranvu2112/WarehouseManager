@@ -1,20 +1,18 @@
 package com.tranvu1805.warehousemanager;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.textfield.TextInputEditText;
 import com.tranvu1805.warehousemanager.DAO.UserDAO;
 import com.tranvu1805.warehousemanager.DTO.UserDTO;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
 
-import java.util.List;
 import java.util.Objects;
 
 public class ForgetActivity extends AppCompatActivity {
@@ -37,7 +35,6 @@ public class ForgetActivity extends AppCompatActivity {
             Toast.makeText(this, "Nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
         } else {
             UserDAO userDAO = new UserDAO(this);
-            List<UserDTO> userDTOS = userDAO.getList();
             String user = edtUser.getText().toString().trim();
             String email = edtEmail.getText().toString().trim();
             UserDTO u = userDAO.getLogin(user);

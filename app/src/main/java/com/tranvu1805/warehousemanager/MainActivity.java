@@ -1,19 +1,16 @@
 package com.tranvu1805.warehousemanager;
 
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.widget.Button;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
-import android.Manifest;
-import android.app.Activity;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
 
@@ -46,9 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 );
             } else {
                 CustomDialog.dialogSingle(this, "Thông báo", "Bạn phải cập quyền đọc bộ nhớ?",
-                        "Đồng Ý", ((dialogInterface, i) -> {
-                            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_READ_EXTERNAL_STORAGE);
-                        }));
+                        "Đồng Ý", ((dialogInterface, i) -> ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_READ_EXTERNAL_STORAGE)));
             }
         }
     }

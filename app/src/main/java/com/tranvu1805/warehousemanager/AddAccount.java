@@ -1,10 +1,6 @@
 package com.tranvu1805.warehousemanager;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import android.text.method.SingleLineTransformationMethod;
@@ -13,10 +9,15 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import com.google.android.material.textfield.TextInputEditText;
 import com.tranvu1805.warehousemanager.DAO.UserDAO;
 import com.tranvu1805.warehousemanager.DTO.UserDTO;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
+
+import java.util.Objects;
 
 public class AddAccount extends AppCompatActivity {
     TextInputEditText edtAccount, edtPass, edtConfirmPass, edtName, edtEmail;
@@ -40,12 +41,12 @@ public class AddAccount extends AppCompatActivity {
 
     private void addUser() {
         userDAO = new UserDAO(this);
-        String account = edtAccount.getText().toString();
-        String pass = edtPass.getText().toString();
-        String confirmPass = edtConfirmPass.getText().toString();
+        String account = Objects.requireNonNull(edtAccount.getText()).toString();
+        String pass = Objects.requireNonNull(edtPass.getText()).toString();
+        String confirmPass = Objects.requireNonNull(edtConfirmPass.getText()).toString();
         int role = rdoAdmin.isChecked() ? 1 : 0;
-        String name = edtName.getText().toString();
-        String email = edtEmail.getText().toString();
+        String name = Objects.requireNonNull(edtName.getText()).toString();
+        String email = Objects.requireNonNull(edtEmail.getText()).toString();
         if (account.isEmpty() || pass.isEmpty() || confirmPass.isEmpty() || name.isEmpty() || email.isEmpty()) {
              CustomDialog.dialogSingle(this, "Thông báo", "Nhập đầy đủ thông tin", "OK", (dialogInterface, i)->{});
         } else if (!pass.equals(confirmPass)) {
@@ -54,12 +55,15 @@ public class AddAccount extends AppCompatActivity {
             UserDTO userDTO = new UserDTO(account, pass, role, name, email);
             int check = userDAO.addRow(userDTO);
             if (check > 0) {
-                CustomDialog.dialogSingle(this, "Thông báo", "Thêm tài khoản thành công","OK", (dialogInterface, i)->{});
-                edtAccount.setText("");
-                edtPass.setText("");
-                edtConfirmPass.setText("");
-                edtName.setText("");
-                edtEmail.setText("");
+                CustomDialog.dialogSingle(this, "Thông báo", "Thêm tài khoản thành công","OK", (dialogInterface, i)->{
+                    edtAccount.setText("");
+                    edtPass.setText("");
+                    edtConfirmPass.setText("");
+                    edtName.setText("");
+                    edtEmail.setText("");
+                    finish();
+                });
+
             }
         }
     }

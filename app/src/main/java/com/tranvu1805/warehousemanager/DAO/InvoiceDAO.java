@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.tranvu1805.warehousemanager.DTO.InvoiceDTO;
-import com.tranvu1805.warehousemanager.DTO.ProductDTO;
 import com.tranvu1805.warehousemanager.DbHelper.MyDbHelper;
 
 import java.util.ArrayList;

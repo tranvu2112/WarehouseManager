@@ -1,22 +1,15 @@
 package com.tranvu1805.warehousemanager.adapter;
 
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.tranvu1805.warehousemanager.DTO.ProductDTO;
 import com.tranvu1805.warehousemanager.R;
@@ -24,7 +17,6 @@ import com.tranvu1805.warehousemanager.R;
 import java.util.ArrayList;
 
 public class SpinProAdapter extends BaseAdapter {
-    private static final int REQUEST_CODE_PERMISSION = 111;
     Context context;
     ArrayList<ProductDTO> productDTOS;
 

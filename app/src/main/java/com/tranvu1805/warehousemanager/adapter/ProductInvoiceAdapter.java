@@ -16,7 +16,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
 import com.tranvu1805.warehousemanager.DAO.ProductDAO;
 import com.tranvu1805.warehousemanager.DTO.ProductDTO;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
@@ -57,14 +56,14 @@ public class ProductInvoiceAdapter extends RecyclerView.Adapter<ProductInvoiceAd
             holder.btnMinus.setOnClickListener(view -> {
                 if(holder.quantity>1){
                     holder.quantity--;
-                    holder.txtQuantity.setText(holder.quantity+"");
+                    holder.txtQuantity.setText(String.valueOf(holder.quantity));
                 }
                 notifyDataSetChanged();
             });
             holder.btnAdd.setOnClickListener(view -> {
                 if(holder.quantity<99){
                     holder.quantity++;
-                    holder.txtQuantity.setText(holder.quantity+"");
+                    holder.txtQuantity.setText(String.valueOf(holder.quantity));
                 }
                 notifyDataSetChanged();
             });

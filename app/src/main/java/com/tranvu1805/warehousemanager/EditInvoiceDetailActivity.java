@@ -1,12 +1,10 @@
 package com.tranvu1805.warehousemanager;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteStatement;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -27,9 +25,12 @@ import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
 import com.tranvu1805.warehousemanager.adapter.ProductInvoiceAdapter;
 import com.tranvu1805.warehousemanager.adapter.SpinProAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Objects;
 
-public class EditDetailActivity extends AppCompatActivity {
+public class EditInvoiceDetailActivity extends AppCompatActivity {
     TextInputEditText edtNumber, edtDate;
     RadioButton rdoImport, rdoExport;
     Button btnSave;
@@ -41,10 +42,10 @@ public class EditDetailActivity extends AppCompatActivity {
     RecyclerView rvProduct;
 
     int idInvoice = 0;
-    ArrayList<InvoiceDetailDTO> invoiceDetailDTOS;
     InvoiceDetailDAO invoiceDetailDAO;
     ProductInvoiceAdapter productInvoiceAdapter;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +63,7 @@ public class EditDetailActivity extends AppCompatActivity {
                 rdoExport.setChecked(true);
             }
             edtNumber.setText(num);
-            edtDate.setText("Ngày tạo: " + dateInvoice);
+            edtDate.setText(dateInvoice);
             spinPro.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @SuppressLint("NotifyDataSetChanged")
                 @Override
@@ -72,7 +73,7 @@ public class EditDetailActivity extends AppCompatActivity {
                         boolean isProductExist = false;
                         for (ProductDTO p : listProductToBuy) {
                             if (p.getId() == selectedProduct.getId()) {
-                                CustomDialog.dialogSingle(EditDetailActivity.this, "Thông báo", "Sản phẩm đã có trong hóa đơn, vui lòng chọn sản phẩm khác", "OK", (dialogInterface, i1) -> {
+                                CustomDialog.dialogSingle(EditInvoiceDetailActivity.this, "Thông báo", "Sản phẩm đã có trong hóa đơn, vui lòng chọn sản phẩm khác", "OK", (dialogInterface, i1) -> {
                                 });
                                 isProductExist = true;
                                 break;
@@ -80,7 +81,7 @@ public class EditDetailActivity extends AppCompatActivity {
                         }
                         if (!isProductExist) {
                             listProductToBuy.add(selectedProduct);
-                            productInvoiceAdapter = new ProductInvoiceAdapter(EditDetailActivity.this, listProductToBuy);
+                            productInvoiceAdapter = new ProductInvoiceAdapter(EditInvoiceDetailActivity.this, listProductToBuy);
                             productInvoiceAdapter.notifyDataSetChanged();
                             rvProduct.setVisibility(View.VISIBLE);
                             rvProduct.setAdapter(productInvoiceAdapter);
@@ -96,9 +97,22 @@ public class EditDetailActivity extends AppCompatActivity {
 
                 }
             });
+            edtDate.setOnClickListener(view -> {
+                Calendar calendar = Calendar.getInstance();
+                int year= calendar.get(Calendar.YEAR);
+                int month= calendar.get(Calendar.MONTH);
+                int day= calendar.get(Calendar.DATE);
+                DatePickerDialog dialog =new DatePickerDialog(this, (datePicker, i, i1, i2) -> {
+                    @SuppressLint("SimpleDateFormat")
+                    SimpleDateFormat dateFormat =new SimpleDateFormat("dd/MM/yyyy");
+                    calendar.set(i,i1,i2);
+                    edtDate.setText(dateFormat.format(calendar.getTime()));
+                },year,month,day);
+                dialog.show();
+            });
             btnSave.setOnClickListener(view -> {
-                String numberInvoice = edtNumber.getText().toString();
-                String date = edtDate.getText().toString();
+                String numberInvoice = Objects.requireNonNull(edtNumber.getText()).toString();
+                String date = Objects.requireNonNull(edtDate.getText()).toString();
 
                 if (numberInvoice.isEmpty() || date.isEmpty() || listProductToBuy.isEmpty()) {
                     CustomDialog.dialogSingle(this, "Thông báo", "Nhập đầy đủ thông tin và sản phẩm", "OK", (dialogInterface, i) -> {
@@ -118,8 +132,8 @@ public class EditDetailActivity extends AppCompatActivity {
                                 invoiceDetailDAO.update(invoiceDetailDTO);
                             }
                             CustomDialog.dialogSingle(this, "Thông báo", "Cập nhật hóa đơn thành công", "OK", (dialogInterface, i) -> {
+                                finish();
                             });
-                            finish();
                         }
                     }catch (Exception e){
                         CustomDialog.dialogSingle(this, "Thông báo", "Cập nhật hóa đơn thất bại", "OK", (dialogInterface, i) -> {
@@ -130,7 +144,6 @@ public class EditDetailActivity extends AppCompatActivity {
             });
         }
     }
-    //đổ listproductTobuy bằng cách lấy dữ liệu từ bên hóa đơn chi tiết
     private void findViews() {
         edtNumber = findViewById(R.id.edtInvoiceDetailNumberEdit);
         edtDate = findViewById(R.id.edtInvoiceDetailDateEdit);

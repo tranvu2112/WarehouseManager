@@ -1,26 +1,19 @@
 package com.tranvu1805.warehousemanager;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.tranvu1805.warehousemanager.DAO.CategoryDAO;
@@ -34,6 +27,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class AddProduct extends AppCompatActivity {
 
@@ -42,7 +36,6 @@ public class AddProduct extends AppCompatActivity {
     ImageButton btnSelectImg;
     Spinner spCat;
     ActivityResultLauncher<Intent> getImg;
-    ActivityResultLauncher<String> requestPermissionLauncher; // Launcher để yêu cầu quyền
     CategoryDAO categoryDAO;
     ProductDAO productDAO;
     ArrayList<CategoryDTO> categoryDTOS;
@@ -57,13 +50,12 @@ public class AddProduct extends AppCompatActivity {
         findViews();
         spCat.setAdapter(adapter);
         btnSelectImg.setOnClickListener(view -> {
-            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
             getImg.launch(intent);
         });
-        btnConfirm.setOnClickListener(view -> {
-            addToList();
-        });
+        btnConfirm.setOnClickListener(view -> addToList());
+        btnCancel.setOnClickListener(v -> finish());
     }
 
     private void findViews() {
@@ -82,10 +74,10 @@ public class AddProduct extends AppCompatActivity {
     }
 
     private void addToList() {
-        String name = edtName.getText().toString();
-        String priceString = edtPrice.getText().toString();
-        String quanString = edtQuan.getText().toString();
-        String detail = edtDetail.getText().toString();
+        String name = Objects.requireNonNull(edtName.getText()).toString();
+        String priceString = Objects.requireNonNull(edtPrice.getText()).toString();
+        String quanString = Objects.requireNonNull(edtQuan.getText()).toString();
+        String detail = Objects.requireNonNull(edtDetail.getText()).toString();
         int idCat = (int) adapter.getItemId(spCat.getSelectedItemPosition());
         if (name.isEmpty() || priceString.isEmpty() || quanString.isEmpty() || detail.isEmpty() || uriImg == null) {
             CustomDialog.dialogSingle(this, "Thông báo", "Nhập đầy đủ thông tin", "OK", (dialogInterface, i) -> {
@@ -101,17 +93,16 @@ public class AddProduct extends AppCompatActivity {
                     if (uriImg != null) {
                         try {
                             InputStream inputStream = getContentResolver().openInputStream(uriImg);
+                            assert inputStream != null;
                             byte[] imageData = getBytes(inputStream);
                             ProductDTO productDTO = new ProductDTO(idCat, name, price, quan, detail,imageData);
                             int check = productDAO.addRow(productDTO);
                             if (check > 0) {
-                                CustomDialog.dialogSingle(this, "Thông báo", "Thêm thành công", "OK", (dialogInterface, i) -> {
-                                    finish();
-                                });
+                                CustomDialog.dialogSingle(this, "Thông báo", "Thêm thành công", "OK", (dialogInterface, i) -> finish());
                             }
 
                         } catch (IOException e) {
-                            Log.d("hhh", "addToList: "+e.toString());
+                            e.printStackTrace();
                         }
                     }
                 }

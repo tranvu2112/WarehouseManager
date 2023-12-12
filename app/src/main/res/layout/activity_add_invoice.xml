@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:background="#D7EBC9"
     android:padding="10dp"
     tools:context=".AddInvoice">
 
@@ -47,6 +48,7 @@
             android:layout_height="48dp"
             android:hint="Ngày"
             android:inputType="text"
+            android:focusable="false"
             android:textColor="@color/black"
             android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -94,11 +96,13 @@
     <Spinner
         android:id="@+id/spProductInvoice"
         android:layout_width="match_parent"
+        android:spinnerMode="dialog"
         android:layout_height="wrap_content"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProductInvoice"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#80BBDE"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 </LinearLayout>

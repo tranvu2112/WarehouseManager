@@ -1,7 +1,6 @@
 package com.tranvu1805.warehousemanager;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -20,6 +19,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.tranvu1805.warehousemanager.DAO.UserDAO;
 import com.tranvu1805.warehousemanager.DTO.UserDTO;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
+
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
     TextInputEditText edtUser, edtPass;
@@ -40,7 +41,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login() {
-        if (edtUser.getText().toString().isEmpty() || edtPass.getText().toString().isEmpty()) {
+        if (Objects.requireNonNull(edtUser.getText()).toString().isEmpty() ||
+                Objects.requireNonNull(edtPass.getText()).toString().isEmpty()) {
             Toast.makeText(this, "Nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
         } else {
             UserDAO userDAO = new UserDAO(this);

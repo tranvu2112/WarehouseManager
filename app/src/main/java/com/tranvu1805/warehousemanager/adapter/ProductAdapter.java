@@ -1,11 +1,9 @@
 package com.tranvu1805.warehousemanager.adapter;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -18,11 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
 import com.tranvu1805.warehousemanager.DAO.ProductDAO;
 import com.tranvu1805.warehousemanager.DTO.ProductDTO;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
@@ -32,7 +27,6 @@ import com.tranvu1805.warehousemanager.R;
 import java.util.ArrayList;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
-    private static final int REQUEST_CODE_PERMISSION = 123;
     Context context;
     ArrayList<ProductDTO> productDTOS;
     ProductDAO productDAO;

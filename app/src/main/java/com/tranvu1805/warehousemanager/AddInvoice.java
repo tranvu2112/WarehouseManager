@@ -1,22 +1,21 @@
 package com.tranvu1805.warehousemanager;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Spinner;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.tranvu1805.warehousemanager.DAO.InvoiceDAO;
@@ -25,7 +24,6 @@ import com.tranvu1805.warehousemanager.DAO.ProductDAO;
 import com.tranvu1805.warehousemanager.DTO.InvoiceDTO;
 import com.tranvu1805.warehousemanager.DTO.InvoiceDetailDTO;
 import com.tranvu1805.warehousemanager.DTO.ProductDTO;
-import com.tranvu1805.warehousemanager.DTO.UserDTO;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
 import com.tranvu1805.warehousemanager.adapter.ProductInvoiceAdapter;
 import com.tranvu1805.warehousemanager.adapter.SpinProAdapter;
@@ -34,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 public class AddInvoice extends AppCompatActivity {
     private static final int REQUEST_CODE_PERMISSION = 123;
@@ -90,9 +89,10 @@ public class AddInvoice extends AppCompatActivity {
 
             }
         });
+
         btnSave.setOnClickListener(view -> {
-            String numberInvoice = edtNumber.getText().toString();
-            String date = edtDate.getText().toString();
+            String numberInvoice = Objects.requireNonNull(edtNumber.getText()).toString();
+            String date = Objects.requireNonNull(edtDate.getText()).toString();
 
             if (numberInvoice.isEmpty() || date.isEmpty() || listProductToBuy.isEmpty()) {
                 CustomDialog.dialogSingle(this, "Thông báo", "Nhập đầy đủ thông tin và sản phẩm", "OK", (dialogInterface, i) -> {
@@ -110,8 +110,8 @@ public class AddInvoice extends AppCompatActivity {
                         invoiceDetailDAO.addRow(invoiceDetailDTO);
                     }
                     CustomDialog.dialogSingle(this, "Thông báo", "Tạo hóa đơn thành công", "OK", (dialogInterface, i) -> {
+                        finish();
                     });
-                    finish();
                 } else {
                     CustomDialog.dialogSingle(this, "Thông báo", "Tạo hóa đơn thất bại", "OK", (dialogInterface, i) -> {
                     });
@@ -151,5 +151,16 @@ public class AddInvoice extends AppCompatActivity {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dateString = dateFormat.format(date);
         edtDate.setText(dateString);
+        edtDate.setOnClickListener(v -> {
+            Calendar calendar = Calendar.getInstance();
+            int year= calendar.get(Calendar.YEAR);
+            int month= calendar.get(Calendar.MONTH);
+            int day= calendar.get(Calendar.DATE);
+            DatePickerDialog dialog =new DatePickerDialog(this, (datePicker, i, i1, i2) -> {
+                calendar.set(i,i1,i2);
+                edtDate.setText(dateFormat.format(calendar.getTime()));
+            },year,month,day);
+            dialog.show();
+        });
     }
 }

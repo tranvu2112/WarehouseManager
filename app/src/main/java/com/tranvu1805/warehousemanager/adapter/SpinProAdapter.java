@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.tranvu1805.warehousemanager.DTO.ProductDTO;
 import com.tranvu1805.warehousemanager.R;
+import com.tranvu1805.warehousemanager.databinding.ProductRowSpinLayoutBinding;
 
 import java.util.ArrayList;
 
@@ -43,22 +45,20 @@ public class SpinProAdapter extends BaseAdapter {
     @SuppressLint("SetTextI18n")
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        View row;
+        ProductRowSpinLayoutBinding binding;
         if (view != null) {
-            row = view;
+            binding = ProductRowSpinLayoutBinding.bind(view);
         } else {
-            row = View.inflate(context, R.layout.product_row_spin_layout, null);
+            binding = ProductRowSpinLayoutBinding.inflate(LayoutInflater.from(context),viewGroup, false);
         }
-        TextView txtName = row.findViewById(R.id.txtNameProSpin);
-        TextView txtPrice = row.findViewById(R.id.txtPriceProSpin);
-        ImageView imgPro = row.findViewById(R.id.imgProductSpin);
+
         ProductDTO productDTO = productDTOS.get(i);
-        txtName.setText(productDTO.getName());
-        txtPrice.setText("Giá: " + productDTO.getPrice());
+        binding.txtNameProSpin.setText(productDTO.getName());
+        binding.txtPriceProSpin.setText("Giá: " + productDTO.getPrice());
         if(productDTO.getImgBlob()!=null){
             Bitmap imgBitmap = BitmapFactory.decodeByteArray(productDTO.getImgBlob(),0,productDTO.getImgBlob().length);
-            imgPro.setImageBitmap(imgBitmap);
+            binding.imgProductSpin.setImageBitmap(imgBitmap);
         }
-        return row;
+        return binding.getRoot();
     }
 }

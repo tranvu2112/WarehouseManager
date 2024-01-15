@@ -10,7 +10,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/txtPriceProductRow"
+        android:id="@+id/txtAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/account"
@@ -20,11 +20,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtNameProductRow"
+        app:layout_constraintTop_toBottomOf="@+id/txtName"
         app:layout_constraintVertical_bias="0.012" />
 
     <TextView
-        android:id="@+id/txtNameProductRow"
+        android:id="@+id/txtName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/full_name"
@@ -39,7 +39,7 @@
         app:layout_constraintVertical_bias="0.034" />
 
     <TextView
-        android:id="@+id/txtRoleRowHome"
+        android:id="@+id/txtRole"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/role"
@@ -49,11 +49,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPriceProductRow"
+        app:layout_constraintTop_toBottomOf="@+id/txtAccount"
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
-        android:id="@+id/btnEditProductRow"
+        android:id="@+id/btnEdit"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="#BAAB7E"

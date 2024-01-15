@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".InvoiceStatiscal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginVertical="20dp"
+        android:text="Thống kê hóa đơn"
+        android:textAllCaps="true"
+        android:textColor="#000"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/spType"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="5dp"
+        android:spinnerMode="dropdown" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/btnDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ngày"
+            android:paddingVertical="5dp"
+            android:paddingHorizontal="10dp"
+            android:textColor="#065FC5"
+            android:background="#A8D0AA"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/btnMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:text="Tháng"
+            android:paddingVertical="5dp"
+            android:paddingHorizontal="10dp"
+            android:textColor="#065FC5"
+            android:background="#A8D0AA"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/btnYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Năm"
+            android:paddingVertical="5dp"
+            android:paddingHorizontal="10dp"
+            android:background="#A8D0AA"
+            android:textColor="#065FC5"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btnCustom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:background="#A8D0AA"
+            android:text="Tùy chọn"
+            android:paddingVertical="5dp"
+            android:paddingHorizontal="10dp"
+            android:textColor="#065FC5"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/containLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp">
+            <EditText
+                android:id="@+id/edtDateStart"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:focusable="false"
+                android:hint="@string/date_start"
+                android:textColorHint="#737171"
+                android:importantForAutofill="no"
+                tools:ignore="TextFields" />
+            <EditText
+                android:id="@+id/edtDateEnd"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:hint="Ngày kết thúc"
+                android:focusable="false"
+                android:layout_marginStart="10dp"
+                android:textColorHint="#737171"
+                android:importantForAutofill="no"
+                tools:ignore="TextFields" />
+        </LinearLayout>
+        <Button
+            android:id="@+id/btnCheck"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/confirm_button"
+            android:text="KIỂM TRA"
+            android:textSize="24sp"
+            android:textColor="#fff"
+            android:layout_gravity="center_horizontal"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtMoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:text="Tiền hàng"
+        android:gravity="center_horizontal"
+        android:paddingHorizontal="10dp"
+        android:layout_marginTop="100dp"
+        android:textColor="#C62828"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+</LinearLayout>

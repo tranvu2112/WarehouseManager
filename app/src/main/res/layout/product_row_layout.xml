@@ -11,7 +11,7 @@
     android:layout_marginHorizontal="5dp">
 
     <ImageView
-        android:id="@+id/imgProductRow"
+        android:id="@+id/imgProduct"
         android:layout_width="0dp"
         android:layout_height="150dp"
         android:layout_weight="2"
@@ -26,7 +26,7 @@
         android:paddingStart="10dp"
         android:layout_weight="3">
         <TextView
-            android:id="@+id/txtNameProductRow"
+            android:id="@+id/txtName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/product_name"
@@ -34,14 +34,14 @@
             android:textSize="24sp"
             android:textStyle="bold" />
         <TextView
-            android:id="@+id/txtPriceProductRow"
+            android:id="@+id/txtPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/price"
             android:textColor="#D60909"
             android:textSize="24sp" />
         <TextView
-            android:id="@+id/txtCategoryProductRow"
+            android:id="@+id/txtCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/category"
@@ -49,7 +49,7 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/txtQuantityProductRow"
+            android:id="@+id/txtQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/quantity"
@@ -57,7 +57,7 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/txtDetailProductRow"
+            android:id="@+id/txtDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/detail"
@@ -73,7 +73,7 @@
         android:gravity="center"
         android:layout_weight="1">
     <ImageButton
-        android:id="@+id/btnEditProductRow"
+        android:id="@+id/btnEdit"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="#BAAB7E"

@@ -3,6 +3,7 @@ package com.tranvu1805.warehousemanager.adapter;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -21,6 +22,7 @@ import com.tranvu1805.warehousemanager.DAO.UserDAO;
 import com.tranvu1805.warehousemanager.DTO.UserDTO;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
 import com.tranvu1805.warehousemanager.R;
+import com.tranvu1805.warehousemanager.databinding.RowUserHomeBinding;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -39,18 +41,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = ((Activity) context).getLayoutInflater().inflate(R.layout.row_user_home, parent, false);
-        return new ViewHolder(view);
+        RowUserHomeBinding binding = RowUserHomeBinding.inflate(LayoutInflater.from(context),parent,false);
+        return new ViewHolder(binding);
     }
 
     @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         UserDTO u = userDTOS.get(position);
-        holder.txtName.setText("Họ tên: " + u.getName());
-        holder.txtAccount.setText("Tài khoản: " + u.getAccount());
+        holder.binding.txtName.setText("Họ tên: " + u.getName());
+        holder.binding.txtAccount.setText("Tài khoản: " + u.getAccount());
         String role = u.getRole() == 1 ? "Admin" : "Nhân viên";
-        holder.txtRole.setText("Chức vụ: " + role);
+        holder.binding.txtRole.setText("Chức vụ: " + role);
         holder.itemView.setOnLongClickListener(view -> {
             CustomDialog.dialogDouble(context, "Thông báo", "Xác nhận xóa tài khoản này", "Có",
                     (dialogInterface, i) -> {
@@ -67,7 +69,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                     });
             return true;
         });
-        holder.btnEdit.setOnClickListener(view -> displayDialog(u));
+        holder.binding.btnEdit.setOnClickListener(view -> displayDialog(u));
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -130,15 +132,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtAccount, txtName, txtRole;
-        ImageButton btnEdit;
+        RowUserHomeBinding binding;
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            txtName = itemView.findViewById(R.id.txtNameProductRow);
-            txtAccount = itemView.findViewById(R.id.txtPriceProductRow);
-            btnEdit = itemView.findViewById(R.id.btnEditProductRow);
-            txtRole = itemView.findViewById(R.id.txtRoleRowHome);
+        public ViewHolder(@NonNull RowUserHomeBinding binding) {
+            super(binding.getRoot());
+            this.binding =binding;
         }
     }
 }

@@ -18,6 +18,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.tranvu1805.warehousemanager.DAO.UserDAO;
 import com.tranvu1805.warehousemanager.DTO.UserDTO;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
+import com.tranvu1805.warehousemanager.fragment.FragmentCollection;
 import com.tranvu1805.warehousemanager.fragment.HomeFragment;
 import com.tranvu1805.warehousemanager.fragment.InvoiceFragment;
 import com.tranvu1805.warehousemanager.fragment.NoticeFragment;
@@ -46,7 +47,7 @@ public class HomeActivity extends AppCompatActivity {
                    fragment = new NoticeFragment();
                 }
             }else if (item.getItemId()==R.id.product){
-                fragment = new ProductFragment();
+                fragment = new FragmentCollection();
             }else if (item.getItemId()==R.id.bill){
                 fragment = new InvoiceFragment();
             }

@@ -4,10 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +14,7 @@ import com.tranvu1805.warehousemanager.DTO.InvoiceDTO;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
 import com.tranvu1805.warehousemanager.EditInvoiceDetailActivity;
 import com.tranvu1805.warehousemanager.InvoiceDetailActivity;
-import com.tranvu1805.warehousemanager.R;
+import com.tranvu1805.warehousemanager.databinding.InvoiceRowLayoutBinding;
 
 import java.util.ArrayList;
 
@@ -35,21 +32,20 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = ((Activity) context).getLayoutInflater().inflate(R.layout.invoice_row_layout, parent, false);
-        return new ViewHolder(view);
+        InvoiceRowLayoutBinding binding = InvoiceRowLayoutBinding.inflate(((Activity)context).getLayoutInflater(),parent,false);
+        return new ViewHolder(binding);
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "NotifyDataSetChanged"})
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         InvoiceDTO invoiceDTO = invoiceDTOS.get(position);
-        holder.txtNumber.setText("Số: " + invoiceDTO.getNumber());
-        holder.txtUser.setText("Id Người tạo: " + invoiceDTO.getIdUser());
+        holder.binding.txtNum.setText("Số: " + invoiceDTO.getNumber());
+        holder.binding.txtUser.setText("Id Người tạo: " + invoiceDTO.getIdUser());
         String type = invoiceDTO.getType() == 0 ? "Nhập" : "Xuất";
-        holder.txtType.setText("Loại: " + type);
-        holder.txtDate.setText("Ngày: " + invoiceDTO.getDate());
-        holder.txtDetail.setText("Mô tả: " + invoiceDTO.getDetail());
-        holder.btnEdit.setOnClickListener(view -> updateInvoice(invoiceDTO));
+        holder.binding.txtType.setText("Loại: " + type);
+        holder.binding.txtDate.setText("Ngày: " + invoiceDTO.getDate());
+        holder.binding.btnEdit.setOnClickListener(view -> updateInvoice(invoiceDTO));
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, InvoiceDetailActivity.class);
             intent.putExtra("idInvoice", invoiceDTO.getId());
@@ -65,9 +61,7 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
                         int check = invoiceDAO.delete(invoiceDTO);
                         if (check > 0) {
                             invoiceDTOS.remove(invoiceDTO);
-                            CustomDialog.dialogSingle(context, "Thông báo", "Xóa thành công", "OK", (dialogInterface1, i1) -> {
-                                notifyDataSetChanged();
-                            });
+                            CustomDialog.dialogSingle(context, "Thông báo", "Xóa thành công", "OK", (dialogInterface1, i1) -> notifyDataSetChanged());
                         }
                     }, "Không", (dialogInterface, i) -> {
                     });
@@ -91,17 +85,10 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
 
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtNumber, txtUser, txtType, txtDate, txtDetail;
-        ImageButton btnEdit;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            txtNumber = itemView.findViewById(R.id.txtInvoiceNumRow);
-            txtUser = itemView.findViewById(R.id.txtUserInvoiceRow);
-            txtType = itemView.findViewById(R.id.txtInvoiceTypeRow);
-            txtDate = itemView.findViewById(R.id.txtInvoiceDateRow);
-            txtDetail = itemView.findViewById(R.id.txtDetailInvoiceRow);
-            btnEdit = itemView.findViewById(R.id.btnEditInvoiceRow);
+        InvoiceRowLayoutBinding binding;
+        public ViewHolder(@NonNull InvoiceRowLayoutBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
 }

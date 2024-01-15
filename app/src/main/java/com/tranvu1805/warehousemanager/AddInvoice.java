@@ -109,11 +109,11 @@ public class AddInvoice extends AppCompatActivity {
                         InvoiceDetailDAO invoiceDetailDAO = new InvoiceDetailDAO(this);
                         invoiceDetailDAO.addRow(invoiceDetailDTO);
                     }
-                    CustomDialog.dialogSingle(this, "Thông báo", "Tạo hóa đơn thành công", "OK", (dialogInterface, i) -> {
-                        finish();
-                    });
+                    CustomDialog.dialogSingle(this, "Thông báo", "Tạo hóa đơn thành công",
+                            "OK", (dialogInterface, i) -> finish());
                 } else {
-                    CustomDialog.dialogSingle(this, "Thông báo", "Tạo hóa đơn thất bại", "OK", (dialogInterface, i) -> {
+                    CustomDialog.dialogSingle(this, "Thông báo", "Tạo hóa đơn thất bại",
+                            "OK", (dialogInterface, i) -> {
                     });
                 }
             }
@@ -148,7 +148,7 @@ public class AddInvoice extends AppCompatActivity {
     @SuppressLint("SimpleDateFormat")
     private void setEdtDateNow() {
         Date date = Calendar.getInstance().getTime();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         String dateString = dateFormat.format(date);
         edtDate.setText(dateString);
         edtDate.setOnClickListener(v -> {

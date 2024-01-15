@@ -6,11 +6,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.tranvu1805.warehousemanager.DAO.ProductDAO;
 import com.tranvu1805.warehousemanager.DTO.ProductDTO;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
-import com.tranvu1805.warehousemanager.R;
+import com.tranvu1805.warehousemanager.databinding.ProductToBuyLayoutBinding;
 
 import java.util.ArrayList;
 
@@ -37,8 +33,8 @@ public class ProductInvoiceAdapter extends RecyclerView.Adapter<ProductInvoiceAd
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-        View view = inflater.inflate(R.layout.product_to_buy_layout, parent, false);
-        return new ViewHolder(view);
+       ProductToBuyLayoutBinding binding = ProductToBuyLayoutBinding.inflate(inflater, parent, false);
+        return new ViewHolder(binding);
     }
 
     @SuppressLint({"SetTextI18n", "NotifyDataSetChanged"})
@@ -46,28 +42,28 @@ public class ProductInvoiceAdapter extends RecyclerView.Adapter<ProductInvoiceAd
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (productDTOS.size() > 0) {
             ProductDTO p = productDTOS.get(position);
-            holder.txtName.setText(p.getName());
-            holder.txtPrice.setText("Giá: " + p.getPrice());
+            holder.binding.txtName1.setText("aaa");
+            holder.binding.txtPrice1.setText("Giá: " + "aaa");
             if(p.getImgBlob()!=null){
                 Bitmap imgBitmap = BitmapFactory.decodeByteArray(p.getImgBlob(),0,p.getImgBlob().length);
-                holder.imgProduct.setImageBitmap(imgBitmap);
+                holder.binding.imgProduct.setImageBitmap(imgBitmap);
             }
 
-            holder.btnMinus.setOnClickListener(view -> {
+            holder.binding.btnMinus.setOnClickListener(view -> {
                 if(holder.quantity>1){
                     holder.quantity--;
-                    holder.txtQuantity.setText(String.valueOf(holder.quantity));
+                    holder.binding.txtQuantity.setText(String.valueOf(holder.quantity));
                 }
                 notifyDataSetChanged();
             });
-            holder.btnAdd.setOnClickListener(view -> {
+            holder.binding.btnAdd.setOnClickListener(view -> {
                 if(holder.quantity<99){
                     holder.quantity++;
-                    holder.txtQuantity.setText(String.valueOf(holder.quantity));
+                    holder.binding.txtQuantity.setText(String.valueOf(holder.quantity));
                 }
                 notifyDataSetChanged();
             });
-            p.setQuantity(Integer.parseInt(holder.txtQuantity.getText().toString()));
+            p.setQuantity(Integer.parseInt(holder.binding.txtQuantity.getText().toString()));
             ProductDAO productDAO = new ProductDAO(context);
             productDAO.update(p);
             holder.itemView.setOnLongClickListener(view -> {
@@ -91,19 +87,13 @@ public class ProductInvoiceAdapter extends RecyclerView.Adapter<ProductInvoiceAd
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtName, txtPrice,txtQuantity;
-        ImageView imgProduct;
-        ImageButton btnAdd,btnMinus;
-        int quantity=1;
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            txtName = itemView.findViewById(R.id.txtNameProductBuy);
-            txtPrice = itemView.findViewById(R.id.txtPriceProductBuy);
-            txtQuantity=itemView.findViewById(R.id.txtQuantityProductBuy);
-            imgProduct = itemView.findViewById(R.id.imgProductBuy);
-            btnAdd = itemView.findViewById(R.id.btnAddProductBuy);
-            btnMinus = itemView.findViewById(R.id.btnMinusProductBuy);
+        int quantity=1;
+        ProductToBuyLayoutBinding binding;
+
+        public ViewHolder(@NonNull ProductToBuyLayoutBinding binding) {
+            super(binding.getRoot());
+            this.binding= binding;
         }
     }
 }

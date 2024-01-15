@@ -12,7 +12,7 @@
     android:padding="10dp">
 
     <ImageView
-        android:id="@+id/imgProductBuy"
+        android:id="@+id/imgProduct"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:contentDescription="@string/image_product"
@@ -28,7 +28,7 @@
         android:paddingHorizontal="20dp">
 
         <TextView
-            android:id="@+id/txtNameProductBuy"
+            android:id="@+id/txtName1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/product_name"
@@ -37,7 +37,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/txtPriceProductBuy"
+            android:id="@+id/txtPrice1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/price"
@@ -54,7 +54,7 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/btnMinusProductBuy"
+            android:id="@+id/btnMinus"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="#BAAB7E"
@@ -62,7 +62,7 @@
             android:scaleType="fitXY"
             app:srcCompat="@drawable/minus_icon" />
         <TextView
-            android:id="@+id/txtQuantityProductBuy"
+            android:id="@+id/txtQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
@@ -71,7 +71,7 @@
             android:text="1"
             android:layout_marginHorizontal="10dp"/>
         <ImageButton
-            android:id="@+id/btnAddProductBuy"
+            android:id="@+id/btnAdd"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="#BAAB7E"

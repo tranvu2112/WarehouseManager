@@ -49,6 +49,17 @@ public class ProductDAO {
         }
        return null;
     }
+
+    @SuppressLint("Recycle")
+    public String getProductInStore() {
+        Cursor c = db.rawQuery("SELECT SUM(thanh_tien) FROM (SELECT SoLuong*Gia as thanh_tien FROM SanPham)",null);
+        if (c.getCount() > 0) {
+            c.moveToFirst();
+            return c.getString(0);
+        }
+        return null;
+    }
+
     public int addRow(ProductDTO u){
         ContentValues values = new ContentValues();
         values.put("MaLoai",u.getIdCat());

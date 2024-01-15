@@ -3,12 +3,8 @@ package com.tranvu1805.warehousemanager.adapter;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,6 +16,7 @@ import com.tranvu1805.warehousemanager.DAO.CategoryDAO;
 import com.tranvu1805.warehousemanager.DTO.CategoryDTO;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
 import com.tranvu1805.warehousemanager.R;
+import com.tranvu1805.warehousemanager.databinding.CatRowAdapterLayoutBinding;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -38,21 +35,20 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-        View view = inflater.inflate(R.layout.cat_row_adapter_layout, parent, false);
-        return new ViewHolder(view);
+        CatRowAdapterLayoutBinding binding = CatRowAdapterLayoutBinding.inflate(((Activity) context).getLayoutInflater(), parent, false);
+        return new ViewHolder(binding);
     }
 
     @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CategoryDTO c = categoryDTOS.get(position);
-        holder.txtName.setText(c.getName());
+        holder.binding.txtName.setText(c.getName());
         holder.itemView.setOnLongClickListener(view -> {
             delCategory(c);
             return false;
         });
-        holder.btnEdit.setOnClickListener(view -> updateCategory(c));
+        holder.binding.btnEdit.setOnClickListener(view -> updateCategory(c));
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -76,10 +72,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                             dialog.cancel();
                         });
                     } else {
-                        CustomDialog.dialogSingle(context, "Thông báo", "Sửa thất bại", "OK", (dialogInterface, i) -> {
-                            dialog.cancel();
-
-                        });
+                        CustomDialog.dialogSingle(context, "Thông báo", "Sửa thất bại", "OK", (dialogInterface, i) -> dialog.cancel());
                     }
                 }
             });
@@ -111,13 +104,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtName;
-        ImageButton btnEdit;
+        CatRowAdapterLayoutBinding binding;
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            txtName = itemView.findViewById(R.id.txtNameCatRow);
-            btnEdit = itemView.findViewById(R.id.btnEditCatRow);
+        public ViewHolder(@NonNull CatRowAdapterLayoutBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
 }

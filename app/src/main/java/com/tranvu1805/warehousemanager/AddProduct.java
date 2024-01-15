@@ -7,21 +7,20 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.widget.Button;
+import android.util.Log;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.tranvu1805.warehousemanager.DAO.CategoryDAO;
 import com.tranvu1805.warehousemanager.DAO.ProductDAO;
 import com.tranvu1805.warehousemanager.DTO.CategoryDTO;
 import com.tranvu1805.warehousemanager.DTO.ProductDTO;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
 import com.tranvu1805.warehousemanager.adapter.SpinCatAdapter;
+import com.tranvu1805.warehousemanager.databinding.ActivityAddProductBinding;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -30,11 +29,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class AddProduct extends AppCompatActivity {
-
-    TextInputEditText edtName, edtPrice, edtQuan, edtDetail;
-    Button btnConfirm, btnCancel;
+    ActivityAddProductBinding binding;
     ImageButton btnSelectImg;
-    Spinner spCat;
     ActivityResultLauncher<Intent> getImg;
     CategoryDAO categoryDAO;
     ProductDAO productDAO;
@@ -45,28 +41,21 @@ public class AddProduct extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_product);
+        binding = ActivityAddProductBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         getImgForProduct();
         findViews();
-        spCat.setAdapter(adapter);
-        btnSelectImg.setOnClickListener(view -> {
+        binding.spCatProAdd.setAdapter(adapter);
+        binding.btnImgProAdd.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
             getImg.launch(intent);
         });
-        btnConfirm.setOnClickListener(view -> addToList());
-        btnCancel.setOnClickListener(v -> finish());
+        binding.btnConfirmProAdd.setOnClickListener(view -> addToList());
+        binding.btnCancelProAdd.setOnClickListener(v -> finish());
     }
 
     private void findViews() {
-        btnConfirm = findViewById(R.id.btnConfirmProAdd);
-        btnCancel = findViewById(R.id.btnCancelProAdd);
-        btnSelectImg = findViewById(R.id.btnImgProAdd);
-        edtName = findViewById(R.id.edtNameProAdd);
-        edtPrice = findViewById(R.id.edtPriceProAdd);
-        edtQuan = findViewById(R.id.edtQuantityProAdd);
-        edtDetail = findViewById(R.id.edtDetailProAdd);
-        spCat = findViewById(R.id.spCatProAdd);
         categoryDAO = new CategoryDAO(this);
         productDAO = new ProductDAO(this);
         categoryDTOS = (ArrayList<CategoryDTO>) categoryDAO.getList();
@@ -74,11 +63,11 @@ public class AddProduct extends AppCompatActivity {
     }
 
     private void addToList() {
-        String name = Objects.requireNonNull(edtName.getText()).toString();
-        String priceString = Objects.requireNonNull(edtPrice.getText()).toString();
-        String quanString = Objects.requireNonNull(edtQuan.getText()).toString();
-        String detail = Objects.requireNonNull(edtDetail.getText()).toString();
-        int idCat = (int) adapter.getItemId(spCat.getSelectedItemPosition());
+        String name = Objects.requireNonNull(binding.edtNameProAdd.getText()).toString();
+        String priceString = Objects.requireNonNull(binding.edtPriceProAdd.getText()).toString();
+        String quanString = Objects.requireNonNull(binding.edtQuantityProAdd.getText()).toString();
+        String detail = Objects.requireNonNull(binding.edtDetailProAdd.getText()).toString();
+        int idCat = (int) adapter.getItemId(binding.spCatProAdd.getSelectedItemPosition());
         if (name.isEmpty() || priceString.isEmpty() || quanString.isEmpty() || detail.isEmpty() || uriImg == null) {
             CustomDialog.dialogSingle(this, "Thông báo", "Nhập đầy đủ thông tin", "OK", (dialogInterface, i) -> {
             });
@@ -95,7 +84,7 @@ public class AddProduct extends AppCompatActivity {
                             InputStream inputStream = getContentResolver().openInputStream(uriImg);
                             assert inputStream != null;
                             byte[] imageData = getBytes(inputStream);
-                            ProductDTO productDTO = new ProductDTO(idCat, name, price, quan, detail,imageData);
+                            ProductDTO productDTO = new ProductDTO(idCat, name, price, quan, detail, imageData);
                             int check = productDAO.addRow(productDTO);
                             if (check > 0) {
                                 CustomDialog.dialogSingle(this, "Thông báo", "Thêm thành công", "OK", (dialogInterface, i) -> finish());
@@ -147,7 +136,7 @@ public class AddProduct extends AppCompatActivity {
             ContentResolver contentResolver = getContentResolver();
             InputStream inputStream = contentResolver.openInputStream(uri);
             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-            btnSelectImg.setImageBitmap(bitmap);
+            binding.btnImgProAdd.setImageBitmap(bitmap);
             if (inputStream != null) {
                 inputStream.close();
             }

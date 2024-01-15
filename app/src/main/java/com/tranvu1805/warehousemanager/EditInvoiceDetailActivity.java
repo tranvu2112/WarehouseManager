@@ -104,7 +104,7 @@ public class EditInvoiceDetailActivity extends AppCompatActivity {
                 int day= calendar.get(Calendar.DATE);
                 DatePickerDialog dialog =new DatePickerDialog(this, (datePicker, i, i1, i2) -> {
                     @SuppressLint("SimpleDateFormat")
-                    SimpleDateFormat dateFormat =new SimpleDateFormat("dd/MM/yyyy");
+                    SimpleDateFormat dateFormat =new SimpleDateFormat("yyyy/MM/dd");
                     calendar.set(i,i1,i2);
                     edtDate.setText(dateFormat.format(calendar.getTime()));
                 },year,month,day);

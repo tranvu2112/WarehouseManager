@@ -7,12 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,7 +17,7 @@ import com.tranvu1805.warehousemanager.DAO.ProductDAO;
 import com.tranvu1805.warehousemanager.DTO.ProductDTO;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
 import com.tranvu1805.warehousemanager.EditProductActivity;
-import com.tranvu1805.warehousemanager.R;
+import com.tranvu1805.warehousemanager.databinding.ProductRowLayoutBinding;
 
 import java.util.ArrayList;
 
@@ -41,24 +36,23 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-        View view = inflater.inflate(R.layout.product_row_layout, parent, false);
-        return new ViewHolder(view);
+        ProductRowLayoutBinding binding = ProductRowLayoutBinding.inflate(((Activity) context).getLayoutInflater(), parent, false);
+        return new ViewHolder(binding);
     }
 
     @SuppressLint({"SetTextI18n", "NotifyDataSetChanged"})
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ProductDTO p = productDTOS.get(position);
-        holder.txtName.setText("Tên: " + p.getName());
-        holder.txtQuantity.setText("Số lượng: " + p.getQuantity());
-        holder.txtPrice.setText("Giá: " + p.getPrice());
+        holder.binding.txtName.setText("Tên: " + p.getName());
+        holder.binding.txtQuantity.setText("Số lượng: " + p.getQuantity());
+        holder.binding.txtPrice.setText("Giá: " + p.getPrice());
         if(p.getImgBlob()!=null){
             Bitmap imgBitmap = BitmapFactory.decodeByteArray(p.getImgBlob(),0,p.getImgBlob().length);
-            holder.imgProduct.setImageBitmap(imgBitmap);
+            holder.binding.imgProduct.setImageBitmap(imgBitmap);
         }
-        holder.txtCat.setText("Thể loại: " + p.getIdCat());
-        holder.txtDetail.setText("Mô tả: " + p.getDetail());
+        holder.binding.txtCategory.setText("Thể loại: " + p.getIdCat());
+        holder.binding.txtDetail.setText("Mô tả: " + p.getDetail());
         holder.itemView.setOnLongClickListener(view -> {
             CustomDialog.dialogDouble(context, "Thông báo", "Bạn có muốn xóa không",
                     "Có", (dialogInterface, i) -> {
@@ -74,7 +68,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                     });
             return true;
         });
-        holder.btnEdit.setOnClickListener(view -> {
+        holder.binding.btnEdit.setOnClickListener(view -> {
             Intent intent = new Intent(context, EditProductActivity.class);
             Bundle bundle = new Bundle();
             bundle.putInt("Id",p.getId());
@@ -99,19 +93,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtName, txtQuantity, txtPrice, txtCat, txtDetail;
-        ImageView imgProduct;
-        ImageButton btnEdit;
+        ProductRowLayoutBinding binding;
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            txtName = itemView.findViewById(R.id.txtNameProductRow);
-            txtQuantity = itemView.findViewById(R.id.txtQuantityProductRow);
-            txtPrice = itemView.findViewById(R.id.txtPriceProductRow);
-            txtCat = itemView.findViewById(R.id.txtCategoryProductRow);
-            txtDetail = itemView.findViewById(R.id.txtDetailProductRow);
-            imgProduct = itemView.findViewById(R.id.imgProductRow);
-            btnEdit = itemView.findViewById(R.id.btnEditProductRow);
+        public ViewHolder(@NonNull ProductRowLayoutBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
 }

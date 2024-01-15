@@ -21,6 +21,7 @@ import com.tranvu1805.warehousemanager.DAO.ProductDAO;
 import com.tranvu1805.warehousemanager.DTO.ProductDTO;
 import com.tranvu1805.warehousemanager.R;
 import com.tranvu1805.warehousemanager.adapter.ProductAdapter;
+import com.tranvu1805.warehousemanager.databinding.FragmentProductBinding;
 
 import java.util.ArrayList;
 
@@ -29,37 +30,23 @@ public class ProductFragment extends Fragment {
     ArrayList<ProductDTO> productDTOS;
     ProductAdapter adapter;
     ProductDAO productDAO;
-    RecyclerView rvProduct;
+    FragmentProductBinding binding;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.fragment_product, container, false);
+        binding = FragmentProductBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rvProduct = view.findViewById(R.id.rvProduct);
         productDAO = new ProductDAO(requireContext());
         productDTOS = (ArrayList<ProductDTO>) productDAO.getList();
         adapter = new ProductAdapter(requireActivity(), productDTOS);
-        rvProduct.setAdapter(adapter);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.product_option_menu,menu);
-    }
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.addProduct) {
-            startActivity(new Intent(requireActivity(), AddProduct.class));
-        }
-        return super.onOptionsItemSelected(item);
+        binding.rvProduct.setAdapter(adapter);
+        binding.btnAdd.setOnClickListener(v -> startActivity(new Intent(requireActivity(), AddProduct.class)));
     }
 
     @SuppressLint("NotifyDataSetChanged")

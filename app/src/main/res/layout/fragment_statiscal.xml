@@ -3,7 +3,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#B7CCA8"
     android:orientation="vertical"
+    android:paddingHorizontal="20dp"
     tools:context=".fragment.StatiscalFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginVertical="30dp"
+        android:text="Thống kê"
+        android:textAllCaps="true"
+        android:textColor="#1565C0"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/component_9"
+        android:paddingHorizontal="10dp"
+        android:text="Thống kê sản phẩm"
+        android:textAllCaps="true"
+        android:textColor="#000"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnInvoice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/component_9"
+        android:paddingHorizontal="19dp"
+        android:text="Thống kê hóa đơn"
+        android:textAllCaps="true"
+        android:textColor="#000"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
 
 </LinearLayout>

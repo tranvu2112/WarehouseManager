@@ -21,46 +21,33 @@ import com.tranvu1805.warehousemanager.DAO.InvoiceDAO;
 import com.tranvu1805.warehousemanager.DTO.InvoiceDTO;
 import com.tranvu1805.warehousemanager.R;
 import com.tranvu1805.warehousemanager.adapter.InvoiceAdapter;
+import com.tranvu1805.warehousemanager.databinding.FragmentInvoiceBinding;
 
 import java.util.ArrayList;
 
 public class InvoiceFragment extends Fragment {
-    RecyclerView rvInvoice;
+    FragmentInvoiceBinding binding;
     InvoiceAdapter adapter;
     InvoiceDAO invoiceDAO;
     ArrayList<InvoiceDTO> invoiceDTOS;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.fragment_invoice, container, false);
+        binding = FragmentInvoiceBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rvInvoice = view.findViewById(R.id.rvInvoice);
         invoiceDAO = new InvoiceDAO(requireContext());
         invoiceDTOS = (ArrayList<InvoiceDTO>) invoiceDAO.getList();
         adapter = new InvoiceAdapter(requireContext(), invoiceDTOS);
-        rvInvoice.setAdapter(adapter);
+        binding.rvInvoice.setAdapter(adapter);
+        binding.btnAdd.setOnClickListener(v -> startActivity(new Intent(requireContext(), AddInvoice.class)));
     }
 
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.invoice_option_menu,menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==R.id.addInvoice){
-            startActivity(new Intent(requireContext(), AddInvoice.class));
-        }
-        return super.onOptionsItemSelected(item);
-    }
     @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onResume() {

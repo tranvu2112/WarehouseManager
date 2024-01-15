@@ -21,48 +21,34 @@ import com.tranvu1805.warehousemanager.DAO.UserDAO;
 import com.tranvu1805.warehousemanager.DTO.UserDTO;
 import com.tranvu1805.warehousemanager.R;
 import com.tranvu1805.warehousemanager.adapter.UserAdapter;
+import com.tranvu1805.warehousemanager.databinding.FragmentUserBinding;
 
 import java.util.ArrayList;
 
 
 public class UserFragment extends Fragment {
-    RecyclerView rvUser;
     UserDAO userDAO;
     ArrayList<UserDTO> userDTOS;
     UserAdapter adapter;
+    FragmentUserBinding binding;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.fragment_user, container, false);
+        binding = FragmentUserBinding.inflate(inflater,container,false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rvUser = view.findViewById(R.id.rvAccount);
         userDAO = new UserDAO(requireActivity());
         userDTOS = (ArrayList<UserDTO>) userDAO.getList();
         adapter = new UserAdapter(requireActivity(), userDTOS);
-        rvUser.setAdapter(adapter);
+        binding.rvAccount.setAdapter(adapter);
+        binding.btnAddUser.setOnClickListener(v -> startActivity(new Intent(requireActivity(), AddAccount.class)));
     }
 
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.account_option_menu,menu);
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==R.id.addAccount){
-            startActivity(new Intent(requireActivity(), AddAccount.class));
-        }
-        return super.onOptionsItemSelected(item);
-    }
     @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onResume() {

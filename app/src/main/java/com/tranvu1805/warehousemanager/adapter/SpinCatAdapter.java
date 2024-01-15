@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.tranvu1805.warehousemanager.DTO.CategoryDTO;
+import com.tranvu1805.warehousemanager.Model.CategoryDTO;
 import com.tranvu1805.warehousemanager.R;
 
 import java.util.ArrayList;

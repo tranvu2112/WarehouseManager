@@ -7,19 +7,14 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.tranvu1805.warehousemanager.AddAccount;
 import com.tranvu1805.warehousemanager.DAO.UserDAO;
-import com.tranvu1805.warehousemanager.DTO.UserDTO;
-import com.tranvu1805.warehousemanager.R;
+import com.tranvu1805.warehousemanager.Model.UserDTO;
 import com.tranvu1805.warehousemanager.adapter.UserAdapter;
 import com.tranvu1805.warehousemanager.databinding.FragmentUserBinding;
 

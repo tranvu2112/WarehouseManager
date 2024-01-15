@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.tranvu1805.warehousemanager.DAO.UserDAO;
-import com.tranvu1805.warehousemanager.DTO.UserDTO;
+import com.tranvu1805.warehousemanager.Model.UserDTO;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
 
 import java.util.Objects;

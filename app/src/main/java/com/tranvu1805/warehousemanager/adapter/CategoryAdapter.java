@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.tranvu1805.warehousemanager.DAO.CategoryDAO;
-import com.tranvu1805.warehousemanager.DTO.CategoryDTO;
+import com.tranvu1805.warehousemanager.Model.CategoryDTO;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
 import com.tranvu1805.warehousemanager.R;
 import com.tranvu1805.warehousemanager.databinding.CatRowAdapterLayoutBinding;

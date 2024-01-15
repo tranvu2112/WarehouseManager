@@ -1,16 +1,12 @@
 package com.tranvu1805.warehousemanager.adapter;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.tranvu1805.warehousemanager.DAO.UserDAO;
-import com.tranvu1805.warehousemanager.DTO.UserDTO;
+import com.tranvu1805.warehousemanager.Model.UserDTO;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
 import com.tranvu1805.warehousemanager.R;
 import com.tranvu1805.warehousemanager.databinding.RowUserHomeBinding;

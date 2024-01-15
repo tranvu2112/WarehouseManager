@@ -11,7 +11,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -19,8 +18,8 @@ import android.widget.Spinner;
 import com.google.android.material.textfield.TextInputEditText;
 import com.tranvu1805.warehousemanager.DAO.CategoryDAO;
 import com.tranvu1805.warehousemanager.DAO.ProductDAO;
-import com.tranvu1805.warehousemanager.DTO.CategoryDTO;
-import com.tranvu1805.warehousemanager.DTO.ProductDTO;
+import com.tranvu1805.warehousemanager.Model.CategoryDTO;
+import com.tranvu1805.warehousemanager.Model.ProductDTO;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
 import com.tranvu1805.warehousemanager.adapter.SpinCatAdapter;
 

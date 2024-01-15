@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tranvu1805.warehousemanager.DAO.InvoiceDetailDAO;
-import com.tranvu1805.warehousemanager.DTO.InvoiceDetailDTO;
+import com.tranvu1805.warehousemanager.Model.InvoiceDetailDTO;
 import com.tranvu1805.warehousemanager.adapter.ProductInvoiceDetailAdapter;
 
 import java.util.ArrayList;

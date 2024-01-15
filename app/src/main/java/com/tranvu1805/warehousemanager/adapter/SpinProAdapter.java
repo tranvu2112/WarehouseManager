@@ -9,11 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.tranvu1805.warehousemanager.DTO.ProductDTO;
-import com.tranvu1805.warehousemanager.R;
+import com.tranvu1805.warehousemanager.Model.ProductDTO;
 import com.tranvu1805.warehousemanager.databinding.ProductRowSpinLayoutBinding;
 
 import java.util.ArrayList;

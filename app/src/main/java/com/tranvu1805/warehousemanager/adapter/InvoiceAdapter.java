@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tranvu1805.warehousemanager.DAO.InvoiceDAO;
-import com.tranvu1805.warehousemanager.DTO.InvoiceDTO;
+import com.tranvu1805.warehousemanager.Model.InvoiceDTO;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
 import com.tranvu1805.warehousemanager.EditInvoiceDetailActivity;
 import com.tranvu1805.warehousemanager.InvoiceDetailActivity;

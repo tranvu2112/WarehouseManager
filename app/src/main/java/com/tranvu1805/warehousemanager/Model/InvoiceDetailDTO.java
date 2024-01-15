@@ -1,4 +1,4 @@
-package com.tranvu1805.warehousemanager.DTO;
+package com.tranvu1805.warehousemanager.Model;
 
 public class InvoiceDetailDTO {
     int idProduct, idInvoice, quantity, price;

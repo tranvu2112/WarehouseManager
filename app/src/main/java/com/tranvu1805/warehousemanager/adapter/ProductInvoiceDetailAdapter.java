@@ -4,16 +4,13 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tranvu1805.warehousemanager.DAO.ProductDAO;
-import com.tranvu1805.warehousemanager.DTO.InvoiceDetailDTO;
-import com.tranvu1805.warehousemanager.R;
+import com.tranvu1805.warehousemanager.Model.InvoiceDetailDTO;
 import com.tranvu1805.warehousemanager.databinding.ProductRowInvoiceDetailBinding;
 
 import java.util.ArrayList;

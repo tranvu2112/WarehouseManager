@@ -1,32 +1,20 @@
 package com.tranvu1805.warehousemanager;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.ImageButton;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentContainerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.textfield.TextInputEditText;
-import com.tranvu1805.warehousemanager.DAO.UserDAO;
-import com.tranvu1805.warehousemanager.DTO.UserDTO;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
 import com.tranvu1805.warehousemanager.fragment.FragmentCollection;
 import com.tranvu1805.warehousemanager.fragment.HomeFragment;
 import com.tranvu1805.warehousemanager.fragment.InvoiceFragment;
 import com.tranvu1805.warehousemanager.fragment.NoticeFragment;
-import com.tranvu1805.warehousemanager.fragment.ProductFragment;
 import com.tranvu1805.warehousemanager.fragment.StatiscalFragment;
 import com.tranvu1805.warehousemanager.fragment.UserFragment;
-
-import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity {
     BottomNavigationView bnvHome;

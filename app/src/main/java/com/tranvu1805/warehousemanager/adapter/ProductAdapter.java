@@ -13,7 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.tranvu1805.warehousemanager.DAO.ProductDAO;
+import com.tranvu1805.warehousemanager.DbHelper.MyDatabase;
 import com.tranvu1805.warehousemanager.Model.ProductDTO;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
 import com.tranvu1805.warehousemanager.EditProductActivity;
@@ -24,7 +24,6 @@ import java.util.ArrayList;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     Context context;
     ArrayList<ProductDTO> productDTOS;
-    ProductDAO productDAO;
 
 
 
@@ -56,8 +55,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.itemView.setOnLongClickListener(view -> {
             CustomDialog.dialogDouble(context, "Thông báo", "Bạn có muốn xóa không",
                     "Có", (dialogInterface, i) -> {
-                        productDAO = new ProductDAO(context);
-                        int check = productDAO.delete(p);
+                        int check = MyDatabase.getInstance(context).productDAO().delete(p);
                         if (check > 0) {
                             productDTOS.remove(p);
                             notifyDataSetChanged();

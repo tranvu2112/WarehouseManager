@@ -1,22 +1,37 @@
 package com.tranvu1805.warehousemanager.Model;
 
-public class InvoiceDTO {
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity(
+        tableName = "motcaitenkhongtrungnoi1",
+        foreignKeys = @ForeignKey(
+                entity = UserDTO.class,
+                parentColumns = "id",
+                childColumns = "idUser",
+                onDelete = ForeignKey.CASCADE
+        )
+)
+public class Invoice {
+    @PrimaryKey(autoGenerate = true)
     int id;
-    String number,date;
-    int idUser, type ;
+    String number, date;
+    int idUser, type;
     String detail;
-
-    public InvoiceDTO() {
+    @Ignore
+    public Invoice() {
     }
-
-    public InvoiceDTO(String number, int type, String date, String detail) {
+    @Ignore
+    public Invoice(String number, int type, String date, String detail) {
         this.number = number;
         this.type = type;
         this.date = date;
         this.detail = detail;
     }
-
-    public InvoiceDTO(String number, int idUser, int type, String date, String detail) {
+    @Ignore
+    public Invoice(String number, int idUser, int type, String date, String detail) {
         this.number = number;
         this.idUser = idUser;
         this.type = type;
@@ -24,7 +39,7 @@ public class InvoiceDTO {
         this.detail = detail;
     }
 
-    public InvoiceDTO(int id, String number, int idUser, int type, String date, String detail) {
+    public Invoice(int id, String number, int idUser, int type, String date, String detail) {
         this.id = id;
         this.number = number;
         this.idUser = idUser;

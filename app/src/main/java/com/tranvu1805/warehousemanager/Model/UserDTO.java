@@ -1,14 +1,21 @@
 package com.tranvu1805.warehousemanager.Model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity (tableName = "TaiKhoan")
 public class UserDTO {
+    @PrimaryKey(autoGenerate = true)
     int id;
     String account, pass;
     int role;
     String name, email;
-
+    @Ignore
     public UserDTO() {
     }
-
+    @Ignore
     public UserDTO(String account, String pass, int role,String name, String email) {
         this.account = account;
         this.pass = pass;

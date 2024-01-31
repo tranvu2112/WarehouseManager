@@ -12,7 +12,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
-import com.tranvu1805.warehousemanager.DAO.CategoryDAO;
+
+import com.tranvu1805.warehousemanager.DbHelper.MyDatabase;
 import com.tranvu1805.warehousemanager.Model.CategoryDTO;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
 import com.tranvu1805.warehousemanager.R;
@@ -24,7 +25,6 @@ import java.util.Objects;
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
     Context context;
     ArrayList<CategoryDTO> categoryDTOS;
-    CategoryDAO categoryDAO;
     AlertDialog dialog;
 
     public CategoryAdapter(Context context, ArrayList<CategoryDTO> categoryDTOS) {
@@ -64,8 +64,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                     });
                 } else {
                     c.setName(edtName.getText().toString());
-                    categoryDAO = new CategoryDAO(context);
-                    int check = categoryDAO.update(c);
+                    long check = MyDatabase.getInstance(context).categoryDAO().updateCategory(c);
                     if (check > 0) {
                         CustomDialog.dialogSingle(context, "Thông báo", "Sửa thành công", "OK", (dialogInterface, i) -> {
                             notifyDataSetChanged();
@@ -85,8 +84,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     private void delCategory(CategoryDTO c) {
         CustomDialog.dialogDouble(context, "Thông báo", "Bạn muốn xóa loại sản phẩm này",
                 "Có", (dialogInterface, i) -> {
-                    categoryDAO = new CategoryDAO(context);
-                    int check = categoryDAO.delete(c);
+                    long check = MyDatabase.getInstance(context).categoryDAO().delete(c);
                     if (check > 0) {
                         categoryDTOS.remove(c);
                         notifyDataSetChanged();

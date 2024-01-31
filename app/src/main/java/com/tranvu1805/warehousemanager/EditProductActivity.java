@@ -16,8 +16,7 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.google.android.material.textfield.TextInputEditText;
-import com.tranvu1805.warehousemanager.DAO.CategoryDAO;
-import com.tranvu1805.warehousemanager.DAO.ProductDAO;
+import com.tranvu1805.warehousemanager.DbHelper.MyDatabase;
 import com.tranvu1805.warehousemanager.Model.CategoryDTO;
 import com.tranvu1805.warehousemanager.Model.ProductDTO;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
@@ -36,7 +35,7 @@ public class EditProductActivity extends AppCompatActivity {
     ImageButton btnSelectImg;
     SpinCatAdapter spinCatAdapter;
     ArrayList<CategoryDTO> categoryDTOS;
-    CategoryDAO categoryDAO;
+
     Uri uriImg;
     ActivityResultLauncher<Intent> getImg;
     private int id;
@@ -59,7 +58,6 @@ public class EditProductActivity extends AppCompatActivity {
     }
 
     private void updateProduct() {
-        ProductDAO productDAO = new ProductDAO(this);
         String name = Objects.requireNonNull(edtName.getText()).toString();
         String priceString = Objects.requireNonNull(edtPrice.getText()).toString();
         String quanString = Objects.requireNonNull(edtQuan.getText()).toString();
@@ -83,7 +81,7 @@ public class EditProductActivity extends AppCompatActivity {
                     }
                     ProductDTO productDTO = new ProductDTO(idCat, name, price, quan, detail,imgBlob);
                     productDTO.setId(id);
-                    int check = productDAO.update(productDTO);
+                    int check = MyDatabase.getInstance(this).productDAO().updateProduct(productDTO);
                     if (check > 0) {
                         CustomDialog.dialogSingle(this, "Thông báo", "Cập nhật thành công", "OK", (dialogInterface, i) -> finish());
                     } else {
@@ -150,8 +148,7 @@ public class EditProductActivity extends AppCompatActivity {
         btnCancel = findViewById(R.id.btnCancelProEdit);
         btnConfirm = findViewById(R.id.btnConfirmProEdit);
         btnSelectImg = findViewById(R.id.btnImgProEdit);
-        categoryDAO = new CategoryDAO(this);
-        categoryDTOS = (ArrayList<CategoryDTO>) categoryDAO.getList();
+        categoryDTOS = (ArrayList<CategoryDTO>) MyDatabase.getInstance(this).categoryDAO().getAll();
         spinCatAdapter = new SpinCatAdapter(this, categoryDTOS);
         spCat.setAdapter(spinCatAdapter);
     }

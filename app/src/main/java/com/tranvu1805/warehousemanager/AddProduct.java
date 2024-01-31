@@ -13,8 +13,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.tranvu1805.warehousemanager.DAO.CategoryDAO;
-import com.tranvu1805.warehousemanager.DAO.ProductDAO;
+import com.tranvu1805.warehousemanager.DbHelper.MyDatabase;
 import com.tranvu1805.warehousemanager.Model.CategoryDTO;
 import com.tranvu1805.warehousemanager.Model.ProductDTO;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
@@ -31,8 +30,6 @@ public class AddProduct extends AppCompatActivity {
     ActivityAddProductBinding binding;
     ImageButton btnSelectImg;
     ActivityResultLauncher<Intent> getImg;
-    CategoryDAO categoryDAO;
-    ProductDAO productDAO;
     ArrayList<CategoryDTO> categoryDTOS;
     SpinCatAdapter adapter;
     Uri uriImg;
@@ -55,9 +52,7 @@ public class AddProduct extends AppCompatActivity {
     }
 
     private void findViews() {
-        categoryDAO = new CategoryDAO(this);
-        productDAO = new ProductDAO(this);
-        categoryDTOS = (ArrayList<CategoryDTO>) categoryDAO.getList();
+        categoryDTOS = (ArrayList<CategoryDTO>) MyDatabase.getInstance(this).categoryDAO().getAll();
         adapter = new SpinCatAdapter(this, categoryDTOS);
     }
 
@@ -84,7 +79,7 @@ public class AddProduct extends AppCompatActivity {
                             assert inputStream != null;
                             byte[] imageData = getBytes(inputStream);
                             ProductDTO productDTO = new ProductDTO(idCat, name, price, quan, detail, imageData);
-                            int check = productDAO.addRow(productDTO);
+                            long check = MyDatabase.getInstance(this).productDAO().insertProduct(productDTO);
                             if (check > 0) {
                                 CustomDialog.dialogSingle(this, "Thông báo", "Thêm thành công", "OK", (dialogInterface, i) -> finish());
                             }

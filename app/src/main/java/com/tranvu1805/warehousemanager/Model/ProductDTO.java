@@ -1,17 +1,32 @@
 package com.tranvu1805.warehousemanager.Model;
 
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "SanPham",
+        foreignKeys = @ForeignKey(
+                entity = CategoryDTO.class,
+                parentColumns = "id",
+                childColumns = "idCat",
+                onDelete = ForeignKey.CASCADE
+        )
+)
 public class ProductDTO {
-    int id, idCat;
+    @PrimaryKey(autoGenerate = true)
+    int id;
+    int idCat;
     String name;
     int price, quantity;
     String detail;
     byte[] imgBlob;
-
+    @Ignore
     public ProductDTO() {
     }
 
-
-    public ProductDTO(int idCat, String name, int price, int quantity, String detail,byte[] imgBlob) {
+    @Ignore
+    public ProductDTO(int idCat, String name, int price, int quantity, String detail, byte[] imgBlob) {
         this.idCat = idCat;
         this.name = name;
         this.price = price;
@@ -20,7 +35,7 @@ public class ProductDTO {
         this.imgBlob = imgBlob;
     }
 
-    public ProductDTO(int id, int idCat, String name, int price, int quantity, String detail,byte[] imgBlob) {
+    public ProductDTO(int id, int idCat, String name, int price, int quantity, String detail, byte[] imgBlob) {
         this.id = id;
         this.idCat = idCat;
         this.imgBlob = imgBlob;

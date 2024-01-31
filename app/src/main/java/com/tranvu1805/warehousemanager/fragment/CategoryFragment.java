@@ -14,9 +14,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputEditText;
-import com.tranvu1805.warehousemanager.DAO.CategoryDAO;
-import com.tranvu1805.warehousemanager.Model.CategoryDTO;
+import com.tranvu1805.warehousemanager.DbHelper.MyDatabase;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
+import com.tranvu1805.warehousemanager.Model.CategoryDTO;
 import com.tranvu1805.warehousemanager.R;
 import com.tranvu1805.warehousemanager.adapter.CategoryAdapter;
 import com.tranvu1805.warehousemanager.databinding.FragmentCategoryBinding;
@@ -26,7 +26,6 @@ import java.util.Objects;
 
 public class CategoryFragment extends Fragment {
     FragmentCategoryBinding binding;
-    CategoryDAO categoryDAO;
     CategoryAdapter adapter;
     ArrayList<CategoryDTO> categoryDTOS;
     AlertDialog dialog;
@@ -34,15 +33,14 @@ public class CategoryFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentCategoryBinding.inflate(inflater,container,false);
+        binding = FragmentCategoryBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        categoryDAO = new CategoryDAO(requireContext());
-        categoryDTOS = (ArrayList<CategoryDTO>) categoryDAO.getList();
+        categoryDTOS = (ArrayList<CategoryDTO>) MyDatabase.getInstance(requireActivity()).categoryDAO().getAll();
         adapter = new CategoryAdapter(requireContext(), categoryDTOS);
         binding.rvCategory.setAdapter(adapter);
         binding.btnAddCategory.setOnClickListener(v -> addCategory());
@@ -61,10 +59,10 @@ public class CategoryFragment extends Fragment {
                     });
                 } else {
                     CategoryDTO c = new CategoryDTO(edtName.getText().toString());
-                    int check = categoryDAO.addRow(c);
+                    long check = MyDatabase.getInstance(requireActivity()).categoryDAO().insertCategory(c);
                     if (check > 0) {
                         categoryDTOS.clear();
-                        categoryDTOS.addAll(categoryDAO.getList());
+                        categoryDTOS.addAll(MyDatabase.getInstance(requireActivity()).categoryDAO().getAll());
                         adapter.notifyDataSetChanged();
                         Toast.makeText(requireActivity(), "Thành công", Toast.LENGTH_SHORT).show();
                         dialog.cancel();

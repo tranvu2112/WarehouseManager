@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
+import com.tranvu1805.warehousemanager.fragment.CategoryFragment;
 import com.tranvu1805.warehousemanager.fragment.FragmentCollection;
 import com.tranvu1805.warehousemanager.fragment.HomeFragment;
 import com.tranvu1805.warehousemanager.fragment.InvoiceFragment;
@@ -26,7 +27,7 @@ public class HomeActivity extends AppCompatActivity {
         bnvHome.setOnItemSelectedListener(item -> {
             Fragment fragment;
             if(item.getItemId()==R.id.home){
-                fragment = new HomeFragment();
+                fragment = new CategoryFragment();
             } else if (item.getItemId()==R.id.user) {
                 if(checkRole()){
                     fragment = new UserFragment();
@@ -40,7 +41,7 @@ public class HomeActivity extends AppCompatActivity {
                 fragment = new InvoiceFragment();
             }
             else {
-                fragment = new StatiscalFragment();
+                fragment = new CategoryFragment();
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.fragHome,fragment).commit();
             return true;

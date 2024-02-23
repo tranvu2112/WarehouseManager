@@ -57,10 +57,6 @@ public class ProductDTO {
         return idCat;
     }
 
-    public void setIdCat(int idCat) {
-        this.idCat = idCat;
-    }
-
     public String getName() {
         return name;
     }
@@ -97,7 +93,4 @@ public class ProductDTO {
         return imgBlob;
     }
 
-    public void setImgBlob(byte[] imgBlob) {
-        this.imgBlob = imgBlob;
-    }
 }

@@ -2,7 +2,6 @@ package com.tranvu1805.warehousemanager.Model;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
-import androidx.room.Ignore;
 
 @Entity(tableName = "ChiTietHoaDon",
         primaryKeys = {"idProduct", "idInvoice"},
@@ -22,10 +21,6 @@ public class InvoiceDetailDTO {
     int idProduct, idInvoice;
     int quantity, price;
 
-    @Ignore
-    public InvoiceDetailDTO() {
-    }
-
     public InvoiceDetailDTO(int idProduct, int idInvoice, int quantity, int price) {
         this.idProduct = idProduct;
         this.idInvoice = idInvoice;
@@ -37,16 +32,8 @@ public class InvoiceDetailDTO {
         return idProduct;
     }
 
-    public void setIdProduct(int idProduct) {
-        this.idProduct = idProduct;
-    }
-
     public int getIdInvoice() {
         return idInvoice;
-    }
-
-    public void setIdInvoice(int idInvoice) {
-        this.idInvoice = idInvoice;
     }
 
     public int getQuantity() {

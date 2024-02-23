@@ -17,6 +17,8 @@ public interface ProductDAO {
 
     @Query("select name from SanPham where id = :idProduct")
     String getNameById(int idProduct);
+    @Query("SELECT SUM(thanh_tien) FROM (SELECT quantity*price as thanh_tien FROM SanPham)")
+    long getMoneyInStore();
 
     @Insert
     long insertProduct(ProductDTO productDTO);

@@ -17,8 +17,10 @@ public interface CategoryDAO {
 
     @Query("select name from TheLoai where id = :idCat")
     String getNameById(int idCat);
+
     @Update
     int updateCategory(CategoryDTO categoryDTO);
+
     @Insert
     long insertCategory(CategoryDTO categoryDTO);
 

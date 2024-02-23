@@ -42,6 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:paddingHorizontal="10dp"
+        app:passwordToggleEnabled="true"
         android:textColorHint="@color/black"
         app:counterEnabled="true"
         app:errorEnabled="true">
@@ -50,7 +51,6 @@
             android:id="@+id/edtPassAdd"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:drawableEnd="@drawable/visible"
             android:hint="@string/pass"
             android:inputType="textPassword"
             android:textColor="@color/black"
@@ -64,13 +64,13 @@
         android:paddingHorizontal="10dp"
         android:textColorHint="@color/black"
         app:counterEnabled="true"
+        app:passwordToggleEnabled="true"
         app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtConfirmPassAdd"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:drawableEnd="@drawable/visible"
             android:hint="@string/confirm_pass"
             android:inputType="textPassword"
             android:textColor="@color/black"

@@ -6,7 +6,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(
-        tableName = "motcaitenkhongtrungnoi1",
+        tableName = "HoaDon",
         foreignKeys = @ForeignKey(
                 entity = UserDTO.class,
                 parentColumns = "id",
@@ -20,9 +20,11 @@ public class Invoice {
     String number, date;
     int idUser, type;
     String detail;
+
     @Ignore
     public Invoice() {
     }
+
     @Ignore
     public Invoice(String number, int type, String date, String detail) {
         this.number = number;
@@ -30,6 +32,7 @@ public class Invoice {
         this.date = date;
         this.detail = detail;
     }
+
     @Ignore
     public Invoice(String number, int idUser, int type, String date, String detail) {
         this.number = number;
@@ -60,16 +63,8 @@ public class Invoice {
         return number;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
     public int getIdUser() {
         return idUser;
-    }
-
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
     }
 
     public int getType() {

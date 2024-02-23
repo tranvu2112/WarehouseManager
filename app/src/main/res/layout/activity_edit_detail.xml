@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:padding="10dp"
@@ -14,11 +13,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:text="Chi Tiết hóa đơn"
+        android:text="Sửa thông tin hóa đơn"
         android:textAllCaps="true"
         android:textColor="#2A822D"
         android:textSize="30sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:ignore="HardcodedText" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -32,7 +32,8 @@
             android:layout_height="48dp"
             android:hint="Số hóa đơn"
             android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -50,7 +51,8 @@
             android:inputType="none"
             android:focusable="false"
             android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
@@ -72,7 +74,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:textSize="20sp"
-                android:text="Nhập" />
+                android:text="Nhập"
+                tools:ignore="HardcodedText" />
 
             <RadioButton
                 android:id="@+id/rdoInvoiceDetailExportEdit"
@@ -80,7 +83,8 @@
                 android:layout_height="48dp"
                 android:layout_marginStart="20dp"
                 android:textSize="20sp"
-                android:text="Xuất" />
+                android:text="Xuất"
+                tools:ignore="HardcodedText" />
         </RadioGroup>
         <Button
             android:id="@+id/btnSaveInvoiceDetailEdit"
@@ -91,18 +95,19 @@
             android:textSize="24sp"
             android:textColor="#fff"
             android:textStyle="bold"
-            android:background="@drawable/confirm_button"/>
+            android:background="@drawable/confirm_button"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
-    <Spinner
-        android:id="@+id/spProductInvoiceDetailEdit"
-        android:layout_width="match_parent"
-        android:spinnerMode="dialog"
-        android:layout_height="wrap_content"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvProductInvoiceDetailEdit"
-        android:layout_marginTop="10dp"
-        android:background="#7CADCB"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+<!--    <Spinner-->
+<!--        android:id="@+id/spProductInvoiceDetailEdit"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:spinnerMode="dialog"-->
+<!--        android:layout_height="wrap_content"/>-->
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/rvProductInvoiceDetailEdit"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:background="#7CADCB"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>-->
 </LinearLayout>

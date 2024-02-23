@@ -7,16 +7,15 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.widget.ImageButton;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.tranvu1805.warehousemanager.DbHelper.MyDatabase;
+import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
 import com.tranvu1805.warehousemanager.Model.CategoryDTO;
 import com.tranvu1805.warehousemanager.Model.ProductDTO;
-import com.tranvu1805.warehousemanager.Dialog.CustomDialog;
 import com.tranvu1805.warehousemanager.adapter.SpinCatAdapter;
 import com.tranvu1805.warehousemanager.databinding.ActivityAddProductBinding;
 
@@ -28,7 +27,7 @@ import java.util.Objects;
 
 public class AddProduct extends AppCompatActivity {
     ActivityAddProductBinding binding;
-    ImageButton btnSelectImg;
+
     ActivityResultLauncher<Intent> getImg;
     ArrayList<CategoryDTO> categoryDTOS;
     SpinCatAdapter adapter;

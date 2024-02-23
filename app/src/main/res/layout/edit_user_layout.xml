@@ -7,8 +7,7 @@
     android:paddingVertical="20dp"
     android:paddingHorizontal="10dp"
     android:gravity="center_horizontal"
-    android:orientation="vertical"
-    tools:context=".AddAccount">
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
@@ -18,7 +17,8 @@
         android:textAllCaps="true"
         android:textColor="#2A822D"
         android:textSize="30sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:ignore="HardcodedText" />
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -74,17 +74,19 @@
         <RadioButton
             android:id="@+id/rdoAdminUpdate"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:text="Admin"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:ignore="HardcodedText" />
 
         <RadioButton
             android:id="@+id/rdoNvUpdate"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginStart="10dp"
             android:text="Nhân viên"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:ignore="HardcodedText" />
     </RadioGroup>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -137,7 +139,8 @@
             android:background="@drawable/confirm_button"
             android:textColor="#fff"
             android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            style="?android:attr/buttonBarButtonStyle" />
 
         <Button
             android:id="@+id/btnCancelUpdate"
@@ -148,7 +151,8 @@
             android:layout_marginStart="20dp"
             android:textColor="#fff"
             android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            style="?android:attr/buttonBarButtonStyle" />
 
     </LinearLayout>
 </LinearLayout>

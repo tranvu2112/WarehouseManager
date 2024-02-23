@@ -3,20 +3,27 @@ package com.tranvu1805.warehousemanager.Model;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity (tableName = "TaiKhoan")
+@Entity(tableName = "TaiKhoan",
+        indices = {@Index(value = "user_name", unique = true)}
+)
 public class UserDTO {
     @PrimaryKey(autoGenerate = true)
     int id;
-    String account, pass;
+    @ColumnInfo(name = "user_name")
+    String account;
+    String pass;
     int role;
     String name, email;
+
     @Ignore
     public UserDTO() {
     }
+
     @Ignore
-    public UserDTO(String account, String pass, int role,String name, String email) {
+    public UserDTO(String account, String pass, int role, String name, String email) {
         this.account = account;
         this.pass = pass;
         this.role = role;
@@ -24,7 +31,7 @@ public class UserDTO {
         this.email = email;
     }
 
-    public UserDTO(int id, String account, String pass, int role,String name, String email) {
+    public UserDTO(int id, String account, String pass, int role, String name, String email) {
         this.id = id;
         this.account = account;
         this.pass = pass;
